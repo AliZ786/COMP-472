@@ -1,14 +1,14 @@
 import matplotlib.pyplot as plt
 import os
-from sklearn.datasets import load_files
+from sklearn.datasets import  load_files
 
 # Task 1.2
 
-business = "/Users/Saleha1/Downloads/BBC/business"
-entertainment = "/Users/Saleha1/Downloads/BBC/entertainment"
-politics = "/Users/Saleha1/Downloads/BBC/politics"
-sport = "/Users/Saleha1/Downloads/BBC/sport"
-tech = "/Users/Saleha1/Downloads/BBC/tech"
+business = 'MP1/BBC/business'
+entertainment = 'MP1/BBC/entertainment'
+politics = 'MP1/BBC/politics'
+sport = 'MP1/BBC/sport'
+tech = 'MP1/BBC/tech'
 
 totalBusinessFiles = 0
 totalEntertainmentFiles = 0
@@ -36,16 +36,24 @@ for base, dirs, files in os.walk(tech):
     for Files in files:
         totalTechFiles += 1
 
+
+
 x = range(5)
 x_labels = ['Business', 'Entertainment', 'Politics', 'Sport', 'Tech']
 y = [totalBusinessFiles, totalEntertainmentFiles, totalPoliticsFiles, totalSportFiles, totalTechFiles]
 
-plt.bar(x, y, color='maroon', align='center')
+
+plt.bar(x, y, color=['black', 'red', 'green', 'blue', 'yellow'], align='center')
 plt.title('BBC Distribution')
+plt.ylabel("Total number of instances per class", fontsize = 10)
 plt.xticks(x, x_labels)
+plt.grid(True)
+
+for index,data in enumerate(y):
+    plt.text(x=index , y =data+1 , s=f"{data}" , fontdict=dict(fontsize=12, color = 'maroon'))
+
 plt.savefig('BBC-distribution.pdf')
-plt.show()
 
-# Task 1.3
+ # Task 1.3
 
-bbc_data = load_files("/Users/Saleha1/Downloads/BBC", encoding = 'latin1')
+bbc_data = load_files('MP1/BBC',load_content=True, encoding = 'latin1')
