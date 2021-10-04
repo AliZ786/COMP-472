@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import os
 from sklearn.datasets import  load_files
+from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
 
 # Task 1.2
 
@@ -57,3 +59,22 @@ plt.savefig('BBC-distribution.pdf')
  # Task 1.3
 
 bbc_data = load_files('MP1/BBC',load_content=True, encoding = 'latin1')
+
+
+
+# Task 1.4
+
+vectorizer = CountVectorizer()
+vectorizer.fit(bbc_data)
+
+vectorizer.get_feature_names_out();
+
+bbc_data_transformed = vectorizer.transform(bbc_data)
+
+bbc_data_transformed.toarray()
+
+print(pd.DataFrame(bbc_data_transformed.toarray(), columns=vectorizer.get_feature_names_out()))
+
+print("\nSparse matrix\n" , bbc_data_transformed)
+
+print ("\nDense matrix\n", bbc_data_transformed.toarray())
