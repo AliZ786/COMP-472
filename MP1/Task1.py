@@ -65,14 +65,15 @@ bbc_data = load_files('MP1/BBC',load_content=True, encoding = 'latin1')
 # Task 1.4
 
 vectorizer = CountVectorizer()
-vectorizer.fit(bbc_data)
+vectorizer.fit(bbc_data.data)
 
 vectorizer.get_feature_names_out();
 
-bbc_data_transformed = vectorizer.transform(bbc_data)
+bbc_data_transformed = vectorizer.transform(bbc_data.data)
 
 bbc_data_transformed.toarray()
 
+print()
 print(pd.DataFrame(bbc_data_transformed.toarray(), columns=vectorizer.get_feature_names_out()))
 
 print("\nSparse matrix\n" , bbc_data_transformed)
