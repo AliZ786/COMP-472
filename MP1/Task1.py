@@ -3,6 +3,7 @@ import os
 from sklearn.datasets import  load_files
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 # Task 1.2
 
@@ -38,8 +39,6 @@ for base, dirs, files in os.walk(tech):
     for Files in files:
         totalTechFiles += 1
 
-
-
 x = range(5)
 x_labels = ['Business', 'Entertainment', 'Politics', 'Sport', 'Tech']
 y = [totalBusinessFiles, totalEntertainmentFiles, totalPoliticsFiles, totalSportFiles, totalTechFiles]
@@ -56,10 +55,10 @@ for index,data in enumerate(y):
 
 plt.savefig('BBC-distribution.pdf')
 
+ 
  # Task 1.3
 
 bbc_data = load_files('MP1/BBC',load_content=True, encoding = 'latin1')
-
 
 
 # Task 1.4
@@ -79,3 +78,8 @@ print(pd.DataFrame(bbc_data_transformed.toarray(), columns=vectorizer.get_featur
 print("\nSparse matrix\n" , bbc_data_transformed)
 
 print ("\nDense matrix\n", bbc_data_transformed.toarray())
+
+
+# Task 1.5
+
+train, test = train_test_split(bbc_data_transformed, test_size=0.20, train_size=0.8, random_state=None)
