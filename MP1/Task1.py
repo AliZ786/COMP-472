@@ -8,6 +8,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import confusion_matrix
 from tabulate import tabulate
 from sklearn.pipeline import make_pipeline
+from sklearn.metrics import classification_report
 
 
 # Task 1.2
@@ -97,13 +98,31 @@ X_train, X_test, y_train, y_test  = train_test_split(bbc_data_transformed, BBC_Y
 
 classifier_MNB = MultinomialNB()
 classifier_MNB.fit(X_train, y_train)
-prediction = classifier_MNB.predict(X_test)
+y_pred = classifier_MNB.predict(X_test)
 
 
 # Task 1.7
 f = open("bbc-performance.txt", "w")
-f.write("(a) ======= MultinomialNB default values, try 1 =======\n\n(b)\n")
-cm = confusion_matrix(y_test, prediction)
+
+# Task 1.7 a
+f.write("(a) ****** MultinomialNB default values, try 1 ******\n\n")
+
+# Task 1.7 b 
+f.write("(b) ******* Confusion Matrix ******\n\n")
+cm = confusion_matrix(y_test, y_pred)
 confusion_matrix = pd.DataFrame(cm, index=x_labels)
-f.write(tabulate(confusion_matrix, x_labels))
+f.write(tabulate(confusion_matrix, x_labels, tablefmt="grid", stralign="center") +"\n")
+
+
+# Task 1.7 c 
+class_report = classification_report(y_test, y_pred, target_names=bbc_data.target_names)
+f.write("\n(c) ****** Precision, recall, and F1-measure for each class *******\n\n")
+f.write(class_report)
+
+
+
+
+
+
+
 f.close()
