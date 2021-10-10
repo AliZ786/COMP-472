@@ -109,7 +109,7 @@ f = open("bbc-performance.txt", "w")
 f.write("(a) ****** MultinomialNB default values, try 1 ******\n\n")
 
 # Task 1.7 b 
-f.write("(b) ******* Confusion Matrix ******\n\n")
+f.write("\n(b) ******* Confusion Matrix ******\n\n")
 cm = confusion_matrix(y_test, y_pred)
 confusion_matrix = pd.DataFrame(cm, index=x_labels)
 f.write(tabulate(confusion_matrix, x_labels, tablefmt="grid", stralign="center") +"\n")
@@ -117,14 +117,32 @@ f.write(tabulate(confusion_matrix, x_labels, tablefmt="grid", stralign="center")
 # Task 1.7 c 
 class_report = classification_report(y_test, y_pred, target_names=bbc_data.target_names)
 f.write("\n(c) ****** Precision, recall, and F1-measure for each class *******\n\n")
-f.write(class_report)
+#Index = [''], because we has to LHS values to put
+class_repo = pd.DataFrame({class_report},index = [''])
+f.write(tabulate(class_repo, tablefmt="grid", stralign="right", numalign="right"))
 
 # Task 1.7 (d)
-f.write("\n(d) ****** Accuracy, macro-average F1 and weighted-average F1 of the model *******\n\n")
+f.write("\n\n(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******\n\n")
 headers = ["Accuracy_score", "Macro-average F1", "Weighted-average F1"]
 accuracy_score = accuracy_score(y_test, y_pred)
 f1_macroavg = f1_score(y_test, y_pred, average='macro')
 f1_weightedavg = f1_score(y_test, y_pred, average='weighted')
 f1_scores = pd.DataFrame({accuracy_score, f1_macroavg, f1_weightedavg}, index=headers)
 f.write(tabulate(f1_scores, tablefmt = "grid"))
+
+
+
+# Task 1.7 e
+f.write("\n\n(e) ****** The prior probabilities of each class *******\n\n")
+class_report_prob = classification_report(y_test, y_pred, target_names=bbc_data.target_names, output_dict=True)
+# Want to compute the average for each class seperately by using the total value of which was 445
+prob_total = class_report_prob['macro avg']['support'] 
+business_prob = (class_report_prob['business']['support']/prob_total)
+entertainment_prob =(class_report_prob['entertainment']['support']/prob_total)
+politics_prob = (class_report_prob['politics']['support']/prob_total)
+sport_prob = (class_report_prob['sport']['support']/prob_total)
+tech_prob = (class_report_prob['tech']['support']/prob_total)
+prior_prob = pd.DataFrame({business_prob, entertainment_prob, politics_prob, sport_prob, tech_prob}, x_labels)
+f.write(tabulate(prior_prob, tablefmt="grid"))
+
 f.close()
