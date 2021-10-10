@@ -7,8 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import confusion_matrix
 from tabulate import tabulate
-from sklearn.pipeline import make_pipeline
 from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
 
 
 # Task 1.2
@@ -113,16 +114,17 @@ cm = confusion_matrix(y_test, y_pred)
 confusion_matrix = pd.DataFrame(cm, index=x_labels)
 f.write(tabulate(confusion_matrix, x_labels, tablefmt="grid", stralign="center") +"\n")
 
-
 # Task 1.7 c 
 class_report = classification_report(y_test, y_pred, target_names=bbc_data.target_names)
 f.write("\n(c) ****** Precision, recall, and F1-measure for each class *******\n\n")
 f.write(class_report)
 
-
-
-
-
-
-
+# Task 1.7 (d)
+f.write("\n(d) ****** Accuracy, macro-average F1 and weighted-average F1 of the model *******\n\n")
+headers = ["Accuracy_score", "Macro-average F1", "Weighted-average F1"]
+accuracy_score = accuracy_score(y_test, y_pred)
+f1_macroavg = f1_score(y_test, y_pred, average='macro')
+f1_weightedavg = f1_score(y_test, y_pred, average='weighted')
+f1_scores = pd.DataFrame({accuracy_score, f1_macroavg, f1_weightedavg}, index=headers)
+f.write(tabulate(f1_scores, tablefmt = "grid"))
 f.close()
