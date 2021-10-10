@@ -4,6 +4,10 @@ from sklearn.datasets import  load_files
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import confusion_matrix, plot_confusion_matrix
+from sklearn.pipeline import make_pipeline
+
 
 # Task 1.2
 
@@ -53,7 +57,7 @@ plt.grid(True)
 for index,data in enumerate(y):
     plt.text(x=index , y =data+1 , s=f"{data}" , fontdict=dict(fontsize=12, color = 'maroon'))
 
-plt.savefig('BBC-distribution.pdf')
+#plt.savefig('BBC-distribution.pdf')
 
  
  # Task 1.3
@@ -68,6 +72,7 @@ vectorizer.fit(bbc_data.data)
 
 vectorizer.get_feature_names_out();
 
+#X_train
 bbc_data_transformed = vectorizer.transform(bbc_data.data)
 
 bbc_data_transformed.toarray()
@@ -82,4 +87,28 @@ print ("\nDense matrix\n", bbc_data_transformed.toarray())
 
 # Task 1.5
 
-train, test = train_test_split(bbc_data_transformed, test_size=0.20, train_size=0.8, random_state=None)
+# y_train
+BBC_Y = bbc_data.target
+
+X_train, X_test, y_train, y_test  = train_test_split(bbc_data_transformed, BBC_Y,  test_size=0.20, train_size=0.8, random_state=None)
+
+
+
+# Task 1.6 
+
+classifier_MNB = MultinomialNB()
+
+classifier_MNB.fit(X_train, y_train)
+
+pred1 = classifier_MNB.predict(X_test)
+
+print()
+
+print(type(pred1))
+
+print(pred1)
+
+
+
+# Task 1.7
+
