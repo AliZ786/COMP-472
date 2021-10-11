@@ -80,6 +80,8 @@ bbc_data_transformed = vectorizer.transform(bbc_data.data)
 
 bbc_data_transformed.toarray()
 
+vocabulary = pd.DataFrame(bbc_data_transformed.toarray(), columns=vectorizer.get_feature_names_out())
+
 # print(pd.DataFrame(bbc_data_transformed.toarray(), columns=vectorizer.get_feature_names_out()))
 
 # print("\nSparse matrix\n" , bbc_data_transformed)
@@ -144,5 +146,16 @@ sport_prob = (class_report_prob['sport']['support']/prob_total)
 tech_prob = (class_report_prob['tech']['support']/prob_total)
 prior_prob = pd.DataFrame({business_prob, entertainment_prob, politics_prob, sport_prob, tech_prob}, x_labels)
 f.write(tabulate(prior_prob, tablefmt="grid"))
+
+
+# Task 1.7 f
+words = " ".join(vocabulary).split()
+f.write("\n\n(f) The size in the vocabulary is: " +str(len(words)))
+
+#Task 1.7 g
+words = " ".join(vocabulary)
+f.write("\n\n(g) The number of word tokens in each class is: " +str(len(words)))
+
+
 
 f.close()
