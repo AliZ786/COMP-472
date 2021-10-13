@@ -3,6 +3,7 @@ import os
 from sklearn.datasets import  load_files
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import confusion_matrix
@@ -144,7 +145,7 @@ entertainment_prob =(class_report_prob['entertainment']['support']/prob_total)
 politics_prob = (class_report_prob['politics']['support']/prob_total)
 sport_prob = (class_report_prob['sport']['support']/prob_total)
 tech_prob = (class_report_prob['tech']['support']/prob_total)
-prior_prob = pd.DataFrame({business_prob, entertainment_prob, politics_prob, sport_prob, tech_prob}, x_labels)
+prior_prob = pd.DataFrame({business_prob, entertainment_prob, politics_prob, sport_prob, tech_prob}, index =x_labels)
 f.write(tabulate(prior_prob, tablefmt="grid"))
 
 
@@ -153,9 +154,23 @@ words = " ".join(vocabulary).split()
 f.write("\n\n(f) The size in the vocabulary is: " +str(len(words)))
 
 #Task 1.7 g
-words = " ".join(vocabulary)
-f.write("\n\n(g) The number of word tokens in each class is: " +str(len(words)))
 
+def get_vector(target, data, data_range):
+    arr = sum(data[target==data_range])
+    return arr
+
+f.write("\n\n(g) The number of word tokens in each class is:\n")
+for i in range(len(x_labels)):
+    words_class = np.sum(get_vector(BBC_Y, bbc_data_transformed, i))
+    words = (x_labels[i]) +": " + (str(words_class)) +"\n"
+    word_tokens = pd.DataFrame({words}, index = [''])
+    f.write(tabulate(word_tokens, tablefmt="grid" ,stralign="right", numalign="right"))
+
+
+#Task 1.7 h 
+f.write("\n\n(h) The number of word tokens in the whole corpus is: ")
+words_corpus =str(sum(map(np.sum, bbc_data_transformed)))
+f.write(words_corpus)
 
 
 f.close()
