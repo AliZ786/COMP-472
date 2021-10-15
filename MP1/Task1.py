@@ -99,6 +99,7 @@ X_train, X_test, y_train, y_test  = train_test_split(bbc_data_transformed, BBC_Y
 
 
 # Task 1.6 and Task 1.8 (a repetition of Task 6 and 7)
+
 for x in range(2):
     from sklearn.metrics import confusion_matrix
     from sklearn.metrics import accuracy_score
@@ -110,7 +111,6 @@ for x in range(2):
     def get_vector(target, data, data_range):
         arr = sum(data[target==data_range])
         return arr
-
 
     # Task 1.7
     f = open("bbc-performance.txt", "a")
@@ -131,7 +131,7 @@ for x in range(2):
     class_repo = pd.DataFrame({class_report},index = [''])
     f.write(tabulate(class_repo, tablefmt="grid", stralign="right", numalign="right"))
 
-    # Task 1.7 (d)
+    # Task 1.7 d
     f.write("\n\n(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******\n")
     headers = ["Accuracy_score", "Macro-average F1", "Weighted-average F1"]
     accuracy_score = accuracy_score(y_test, y_pred)
@@ -139,8 +139,6 @@ for x in range(2):
     f1_weightedavg = f1_score(y_test, y_pred, average='weighted')
     f1_scores = pd.DataFrame({accuracy_score, f1_macroavg, f1_weightedavg}, index=headers)
     f.write(tabulate(f1_scores, tablefmt = "grid"))
-
-
 
     # Task 1.7 e
     f.write("\n\n(e) ****** The prior probabilities of each class *******\n")
@@ -155,14 +153,11 @@ for x in range(2):
     prior_prob = pd.DataFrame({business_prob, entertainment_prob, politics_prob, sport_prob, tech_prob}, index = x_labels)
     f.write(tabulate(prior_prob, headers=["Class", "Probability"], tablefmt="grid"))
 
-
     # Task 1.7 f
     words = " ".join(vocabulary).split()
     f.write("\n\n(f) The size in the vocabulary is: " +str(len(words)))
 
     #Task 1.7 g
-
-
     f.write("\n\n(g) The number of word tokens in each class is:\n")
     word_tokens = []
     table_headers = ["Class" , "Word-Tokens"]
@@ -174,9 +169,7 @@ for x in range(2):
         column = data1, data2
         word_tokens.append(column)
 
-
     f.write(tabulate(word_tokens, tablefmt="grid", headers =table_headers ,stralign="right", numalign="right"))
-
 
     #Task 1.7 h 
     f.write("\n\n(h) The number of word tokens in the whole corpus is: ")
