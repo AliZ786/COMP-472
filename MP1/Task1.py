@@ -208,7 +208,43 @@ onefreq_words = np.count_nonzero(total_words.toarray()==1)
 percentage = "{:.2f}".format((onefreq_words/total_words.toarray().size) * 100)
 formatted_percentage =  str(percentage) + " %"
 f.write("\n Number of words: " + str(onefreq_words)  + "\n")
-f.write(" Percentage of words: " + formatted_percentage)
+f.write(" Percentage of words: " + formatted_percentage + "\n")
+
+# Task 1.7 k
+f.write("\n\n(j) 2 favourite words and their log prob:\n\n ")
+
+word1 = "potato"
+word2 = "zombies"
+
+vocabularylist = vectorizer.get_feature_names_out()
+fav1 = np.where(vocabularylist == word1)[0][0]
+fav2 = np.where(vocabularylist == word2)[0][0]
+
+# First fav word
+business_logprob = classifier_MNB.feature_log_prob_[0][fav1]
+entertainment_logprob = classifier_MNB.feature_log_prob_[1][fav1]
+politics_logprob = classifier_MNB.feature_log_prob_[2][fav1]
+sports_logprob = classifier_MNB.feature_log_prob_[3][fav1]
+tech_logprob = classifier_MNB.feature_log_prob_[4][fav1]
+logprob1 = business_logprob + entertainment_logprob + politics_logprob + sports_logprob + tech_logprob
+
+f.write("Favourite word 1: " + "\n")
+table_headers = ["Class" , "Log prob"]
+table1 = pd.DataFrame({business_logprob, entertainment_logprob, politics_logprob, sports_logprob, tech_logprob}, index = x_labels)
+f.write(tabulate(table1, headers = table_headers, tablefmt = "grid"))
+
+# Second fav word
+business_logprob = classifier_MNB.feature_log_prob_[0][fav2]
+entertainment_logprob = classifier_MNB.feature_log_prob_[1][fav2]
+politics_logprob = classifier_MNB.feature_log_prob_[2][fav2]
+sports_logprob = classifier_MNB.feature_log_prob_[3][fav2]
+tech_logprob = classifier_MNB.feature_log_prob_[4][fav2]
+
+f.write("\n\n" + "Favourite word 2: " + "\n")
+table_headers = ["Class" , "Log prob"]
+table2 = pd.DataFrame({business_logprob, entertainment_logprob, politics_logprob, sports_logprob, tech_logprob}, index = x_labels)
+f.write(tabulate(table2, headers = table_headers, tablefmt = "grid"))
+
 
 
 f.close()
