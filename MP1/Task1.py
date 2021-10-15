@@ -104,6 +104,11 @@ classifier_MNB = MultinomialNB()
 classifier_MNB.fit(X_train, y_train)
 y_pred = classifier_MNB.predict(X_test)
 
+def get_vector(target, data, data_range):
+    arr = sum(data[target==data_range])
+    return arr
+
+
 
 # Task 1.7
 f = open("bbc-performance.txt", "w")
@@ -112,20 +117,20 @@ f = open("bbc-performance.txt", "w")
 f.write("(a) ****** MultinomialNB default values, try 1 ******\n\n")
 
 # Task 1.7 b 
-f.write("\n(b) ******* Confusion Matrix ******\n\n")
+f.write("\n(b) ******* Confusion Matrix ******\n")
 cm = confusion_matrix(y_test, y_pred)
 confusion_matrix = pd.DataFrame(cm, index=x_labels)
 f.write(tabulate(confusion_matrix, x_labels, tablefmt="grid", stralign="center") +"\n")
 
 # Task 1.7 c 
 class_report = classification_report(y_test, y_pred, target_names=bbc_data.target_names)
-f.write("\n(c) ****** Precision, recall, and F1-measure for each class *******\n\n")
+f.write("\n(c) ****** Precision, recall, and F1-measure for each class *******\n")
 #Index = [''], because we has to LHS values to put
 class_repo = pd.DataFrame({class_report},index = [''])
 f.write(tabulate(class_repo, tablefmt="grid", stralign="right", numalign="right"))
 
 # Task 1.7 (d)
-f.write("\n\n(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******\n\n")
+f.write("\n\n(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******\n")
 headers = ["Accuracy_score", "Macro-average F1", "Weighted-average F1"]
 accuracy_score = accuracy_score(y_test, y_pred)
 f1_macroavg = f1_score(y_test, y_pred, average='macro')
@@ -136,7 +141,7 @@ f.write(tabulate(f1_scores, tablefmt = "grid"))
 
 
 # Task 1.7 e
-f.write("\n\n(e) ****** The prior probabilities of each class *******\n\n")
+f.write("\n\n(e) ****** The prior probabilities of each class *******\n")
 class_report_prob = classification_report(y_test, y_pred, target_names=bbc_data.target_names, output_dict=True)
 # Want to compute the average for each class seperately by using the total value of which was 445
 prob_total = class_report_prob['macro avg']['support'] 
@@ -145,8 +150,8 @@ entertainment_prob =(class_report_prob['entertainment']['support']/prob_total)
 politics_prob = (class_report_prob['politics']['support']/prob_total)
 sport_prob = (class_report_prob['sport']['support']/prob_total)
 tech_prob = (class_report_prob['tech']['support']/prob_total)
-prior_prob = pd.DataFrame({business_prob, entertainment_prob, politics_prob, sport_prob, tech_prob}, index =x_labels)
-f.write(tabulate(prior_prob, tablefmt="grid"))
+prior_prob = pd.DataFrame({business_prob, entertainment_prob, politics_prob, sport_prob, tech_prob}, index = x_labels)
+f.write(tabulate(prior_prob, headers=["Class", "Probability"], tablefmt="grid"))
 
 
 # Task 1.7 f
@@ -155,22 +160,47 @@ f.write("\n\n(f) The size in the vocabulary is: " +str(len(words)))
 
 #Task 1.7 g
 
-def get_vector(target, data, data_range):
-    arr = sum(data[target==data_range])
-    return arr
 
 f.write("\n\n(g) The number of word tokens in each class is:\n")
+word_tokens = []
+table_headers = ["Class" , "Word-Tokens"]
 for i in range(len(x_labels)):
     words_class = np.sum(get_vector(BBC_Y, bbc_data_transformed, i))
     words = (x_labels[i]) +": " + (str(words_class)) +"\n"
-    word_tokens = pd.DataFrame({words}, index = [''])
-    f.write(tabulate(word_tokens, tablefmt="grid" ,stralign="right", numalign="right"))
+    data1 = x_labels[i]
+    data2 = (words_class)
+    column = data1, data2
+    word_tokens.append(column)
+
+
+f.write(tabulate(word_tokens, tablefmt="grid", headers =table_headers ,stralign="right", numalign="right"))
 
 
 #Task 1.7 h 
 f.write("\n\n(h) The number of word tokens in the whole corpus is: ")
 words_corpus =str(sum(map(np.sum, bbc_data_transformed)))
 f.write(words_corpus)
+
+#Task 1.7 i 
+f.write("\n\n(i) Number and percentage of words with a frequency of zero in each class :\n ")
+
+
+freq_table = []
+table_headers = ["Class", "Words", "Percentage"]
+for i in range(len(x_labels)):
+    total_words = get_vector(BBC_Y, bbc_data_transformed, i)
+    zerofreq_words  = np.count_nonzero(total_words.toarray()==0)
+    percentage = "{:.2f}".format((zerofreq_words/total_words.toarray().size) * 100)
+    formatted_percentage =  str(percentage) + " %"
+    data_1 = x_labels[i]
+    data2 = zerofreq_words
+    data3 = formatted_percentage
+    column = data_1, data2, data3
+    freq_table.append(column)
+
+f.write(tabulate(freq_table, tablefmt="grid", headers=table_headers))
+        
+    
 
 
 f.close()
