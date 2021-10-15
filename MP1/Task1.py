@@ -48,7 +48,7 @@ for base, dirs, files in os.walk(tech):
         totalTechFiles += 1
 
 x = range(5)
-x_labels = ['Business', 'Entertainment', 'Politics', 'Sport', 'Tech']
+x_labels = ["Business", "Entertainment", "Politics", "Sports", "Tech"]
 y = [totalBusinessFiles, totalEntertainmentFiles, totalPoliticsFiles, totalSportFiles, totalTechFiles]
 
 
@@ -211,7 +211,7 @@ f.write("\n Number of words: " + str(onefreq_words)  + "\n")
 f.write(" Percentage of words: " + formatted_percentage + "\n")
 
 # Task 1.7 k
-f.write("\n\n(j) 2 favourite words and their log prob:\n\n ")
+f.write("\n\n(k) 2 favourite words and their log prob:\n\n ")
 
 word1 = "potato"
 word2 = "zombies"
@@ -228,7 +228,7 @@ sports_logprob = classifier_MNB.feature_log_prob_[3][fav1]
 tech_logprob = classifier_MNB.feature_log_prob_[4][fav1]
 logprob1 = business_logprob + entertainment_logprob + politics_logprob + sports_logprob + tech_logprob
 
-f.write("Favourite word 1: " + "\n")
+f.write("Favourite word 1: " + word1 + "\n")
 table_headers = ["Class" , "Log prob"]
 table1 = pd.DataFrame({business_logprob, entertainment_logprob, politics_logprob, sports_logprob, tech_logprob}, index = x_labels)
 f.write(tabulate(table1, headers = table_headers, tablefmt = "grid"))
@@ -240,11 +240,14 @@ politics_logprob = classifier_MNB.feature_log_prob_[2][fav2]
 sports_logprob = classifier_MNB.feature_log_prob_[3][fav2]
 tech_logprob = classifier_MNB.feature_log_prob_[4][fav2]
 
-f.write("\n\n" + "Favourite word 2: " + "\n")
+f.write("\n\n" + "Favourite word 2: " + word2 + "\n")
 table_headers = ["Class" , "Log prob"]
 table2 = pd.DataFrame({business_logprob, entertainment_logprob, politics_logprob, sports_logprob, tech_logprob}, index = x_labels)
 f.write(tabulate(table2, headers = table_headers, tablefmt = "grid"))
 
 
-
 f.close()
+
+
+# g = open("bbc-performance.txt")
+# g.write()
