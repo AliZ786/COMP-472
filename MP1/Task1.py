@@ -184,12 +184,12 @@ f.write(words_corpus)
 #Task 1.7 i 
 f.write("\n\n(i) Number and percentage of words with a frequency of zero in each class :\n ")
 
-
 freq_table = []
 table_headers = ["Class", "Words", "Percentage"]
 for i in range(len(x_labels)):
     total_words = get_vector(BBC_Y, bbc_data_transformed, i)
-    zerofreq_words  = np.count_nonzero(total_words.toarray()==0)
+    nonzerofreq_words  = np.count_nonzero(total_words.toarray())
+    zerofreq_words = total_words.toarray().size - nonzerofreq_words
     percentage = "{:.2f}".format((zerofreq_words/total_words.toarray().size) * 100)
     formatted_percentage =  str(percentage) + " %"
     data_1 = x_labels[i]
@@ -200,7 +200,15 @@ for i in range(len(x_labels)):
 
 f.write(tabulate(freq_table, tablefmt="grid", headers=table_headers))
         
-    
+# Task 1.7 j    
+f.write("\n\n(j) Number and percentage of words with a frequency of one in entire corpus :\n ")
+
+words_corpus = bbc_data_transformed.toarray()
+onefreq_words = np.count_nonzero(total_words.toarray()==1)
+percentage = "{:.2f}".format((onefreq_words/total_words.toarray().size) * 100)
+formatted_percentage =  str(percentage) + " %"
+f.write("\n Number of words: " + str(onefreq_words)  + "\n")
+f.write(" Percentage of words: " + formatted_percentage)
 
 
 f.close()
