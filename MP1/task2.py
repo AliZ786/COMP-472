@@ -23,6 +23,7 @@ plt.title("Drug distribution")
 plt.savefig("drug-distribution.pdf")
 
 # Task 2.4
-sex_classifier = pd.get_dummies(drug_file["Sex"])
-bp_classifier = pd.get_dummies(pd.Categorical(drug_file["BP"], ['LOW', 'NORMAL', 'HIGH'], ordered=True))
-cholesterol_classifier = pd.get_dummies(pd.Categorical(drug_file["Cholesterol"], ['NORMAL', 'HIGH'], ordered=True))
+drug_file["BP"] = pd.Categorical(drug_file["BP"], ['LOW', 'NORMAL', 'HIGH'], ordered=True)
+drug_file["Cholesterol"] = pd.Categorical(drug_file["Cholesterol"], ['NORMAL', 'HIGH'], ordered=True)
+
+numerical_data = pd.get_dummies(drug_file, columns=['Sex', 'BP', 'Cholesterol'])
