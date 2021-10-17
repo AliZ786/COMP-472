@@ -62,7 +62,7 @@ perceptron_classifier = Perceptron()
 perceptron_classifier.fit(X_train, y_train)
 
 #e) Multi-Layered Perceptron with the provided parameters -- RETURNS A WARNING 
-base_ml_perceptron_classifier = MLPClassifier(hidden_layer_sizes=(100,1), solver='sgd')
+base_ml_perceptron_classifier = MLPClassifier(hidden_layer_sizes=(100,1), activation='logistic', solver='sgd')
 base_ml_perceptron_classifier.fit(X_train, y_train)
 
 #f) Better performing Multi-Layered Perceptron -- RETURNS A WARNING
@@ -99,10 +99,26 @@ def dostepseven(classifier_obj):
 	for i in range(len(class_arr)):
 		performance_file.write(class_arr[i] + ':' + format(f1[i], '.2f') + '\t\n')
 
+# NB
 performance_file.write("Gaussian Naive Bayes Classifier\na)\n")
 dostepseven(gnb_classifier)
 performance_file.write(separator)
 
+# Base-DT
 performance_file.write("Base Decision Tree Classifier\na)\n")
 dostepseven(base_dt_classifier)
 performance_file.write(separator)
+
+# Top-DT
+
+# PER
+performance_file.write("Perceptron Classifier\na)\n")
+dostepseven(perceptron_classifier)
+performance_file.write(separator)
+
+# Base-MLP
+performance_file.write("Base Multi-Layered Perceptron Classifier\na)\n")
+dostepseven(perceptron_classifier)
+performance_file.write(separator)
+
+# Top-MLP
