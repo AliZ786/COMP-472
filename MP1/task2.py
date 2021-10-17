@@ -9,7 +9,9 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
+from sklearn.model_selection import GridSearchCV
 
 
 # Task 2.2
@@ -98,6 +100,15 @@ def dostepseven(classifier_obj):
 
 	for i in range(len(class_arr)):
 		performance_file.write(class_arr[i] + ':' + format(f1[i], '.2f') + '\t\n')
+
+	accuracy = accuracy_score(y_test, classifier_obj.predict(X_test))
+	performance_file.write("\nAccuracy of the model: " + str(accuracy) + "\n")
+
+	f1_macroavg = f1_score(y_test, classifier_obj.predict(X_test), average='macro')
+	performance_file.write("Macro-average F1 of the model: " + str(f1_macroavg) + "\n")
+
+	f1_weightedavg = f1_score(y_test, classifier_obj.predict(X_test), average='weighted')
+	performance_file.write("Weighted-average F1 of the model: " + str(f1_weightedavg) + "\n")
 
 # NB
 performance_file.write("Gaussian Naive Bayes Classifier\na)\n")
