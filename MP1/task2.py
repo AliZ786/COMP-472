@@ -51,10 +51,10 @@ gnb_classifier.fit(X_train, y_train)
 base_dt_classifier = DecisionTreeClassifier()
 base_dt_classifier.fit(X_train, y_train)
 
-#c) Better performing Decision Tree -- UNDER CONSTRUCTION
-hyper_params = {'criterion':['gini', 'entropy'], 'max_depth': [2,10,20], 'min_samples_split': [2, 20, 50]} #delete later maybe
+#c) Better performing Decision Tree
+hyper_params = {'criterion':['gini', 'entropy'], 'max_depth': [2,10,20], 'min_samples_split': [2, 20, 50]}
 
-top_dt_classifier = DecisionTreeClassifier(criterion='entropy', max_depth=8, min_samples_split=20)
+top_dt_classifier = GridSearchCV(DecisionTreeClassifier(), hyper_params)
 top_dt_classifier.fit(X_train, y_train)
 
 #d) Perceptron with default parameters
@@ -66,9 +66,9 @@ base_ml_perceptron_classifier = MLPClassifier(hidden_layer_sizes=(100,1), activa
 base_ml_perceptron_classifier.fit(X_train, y_train)
 
 #f) Better performing Multi-Layered Perceptron -- RETURNS A WARNING
-params = {'activation':['gini', 'logistic', 'tanh', 'relu'], 'solver': ['sgd', 'adam'], 'hidden_layer_sizes': [[10,3], [80,2]]} #delete later maybe
+params = {'activation':['identity', 'logistic', 'tanh', 'relu'], 'solver': ['sgd', 'adam'], 'hidden_layer_sizes': [[10,10,10], [50,30]]} 
 
-top_ml_perceptron_classifier = MLPClassifier(activation='identity', solver='sgd', hidden_layer_sizes=(10,3))
+top_ml_perceptron_classifier = GridSearchCV(MLPClassifier(), params)
 top_ml_perceptron_classifier.fit(X_train, y_train)
 
 # Task 2.7
@@ -105,20 +105,26 @@ dostepseven(gnb_classifier)
 performance_file.write(separator)
 
 # Base-DT
-performance_file.write("Base Decision Tree Classifier\na)\n")
+performance_file.write("Base Decision Tree Classifier\nb)\n")
 dostepseven(base_dt_classifier)
 performance_file.write(separator)
 
 # Top-DT
+performance_file.write("Top Decision Tree Classifier\nc)\n")
+dostepseven(top_dt_classifier)
+performance_file.write(separator)
 
 # PER
-performance_file.write("Perceptron Classifier\na)\n")
+performance_file.write("Perceptron Classifier\nd)\n")
 dostepseven(perceptron_classifier)
 performance_file.write(separator)
 
 # Base-MLP
-performance_file.write("Base Multi-Layered Perceptron Classifier\na)\n")
+performance_file.write("Base Multi-Layered Perceptron Classifier\ne)\n")
 dostepseven(perceptron_classifier)
 performance_file.write(separator)
 
 # Top-MLP
+performance_file.write("Top Multi-Layered Perceptron Classifier\nf)\n")
+dostepseven(top_ml_perceptron_classifier)
+performance_file.write(separator)
