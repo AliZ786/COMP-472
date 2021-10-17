@@ -83,19 +83,19 @@ def dostepseven(classifier_obj):
 	cf_matrix = confusion_matrix(y_test, classifier_obj.predict(X_test))
 	np.savetxt(performance_file, cf_matrix, fmt='%.0f', delimiter='|')
 
-	precision = precision_score(y_test, classifier_obj.predict(X_test), average=None)
+	precision = precision_score(y_test, classifier_obj.predict(X_test), average=None, zero_division=0)
 	performance_file.write("Precision Measures by Class\n")
 
 	for i in range(len(class_arr)):
 		performance_file.write(class_arr[i] + ':' + format(precision[i], '.2f') + '\t\n')
 
-	recall = recall_score(y_test, classifier_obj.predict(X_test), average=None)
+	recall = recall_score(y_test, classifier_obj.predict(X_test), average=None, zero_division=0)
 	performance_file.write("Recall Measures by Class\n")
 
 	for i in range(len(class_arr)):
 		performance_file.write(class_arr[i] + ':' + format(recall[i], '.2f') + '\t\n')
 
-	f1 = f1_score(y_test, classifier_obj.predict(X_test), average=None)
+	f1 = f1_score(y_test, classifier_obj.predict(X_test), average=None, zero_division=0)
 	performance_file.write("F1 Measures by Class\n")
 
 	for i in range(len(class_arr)):
