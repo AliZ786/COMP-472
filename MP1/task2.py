@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import statistics
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
@@ -139,3 +140,47 @@ performance_file.write(separator)
 performance_file.write("Top Multi-Layered Perceptron Classifier\nf)\n")
 dostepseven(top_ml_perceptron_classifier)
 performance_file.write(separator)
+
+# task 2.8
+def dostepeight(classifier_obj):
+	acc=[]
+	mac_avg=[]
+	wei_avg=[]
+
+	for x in range(10,):
+		classifier_obj.fit(X_train, y_train)
+		acc.append(accuracy_score(y_test, classifier_obj.predict(X_test)))
+		mac_avg.append(f1_score(y_test, classifier_obj.predict(X_test), average='macro'))
+		wei_avg.append(f1_score(y_test, classifier_obj.predict(X_test), average='weighted'))
+
+	acc_avg = sum(acc) / len(acc)
+	mac_avg_avg = sum(mac_avg) / len(mac_avg)
+	wei_avg_avg = sum(wei_avg) / len(wei_avg)
+	acc_stdev = statistics.stdev(acc)
+	mac_avg_stdev = statistics.stdev(mac_avg)
+	wei_avg_stdev = statistics.stdev(wei_avg)
+
+	performance_file.write('Average accuracy: ' + str(acc_avg) + '\n')
+	performance_file.write('Accuracy standard deviation: ' + str(acc_stdev) + '\n')
+	performance_file.write('Average macro-average F1: ' + str(mac_avg_avg) + '\n')
+	performance_file.write('Macro-average F1 standard deviation: ' + str(mac_avg_stdev) + '\n')
+	performance_file.write('Average weighted-average F1: ' + str(wei_avg_avg) + '\n')
+	performance_file.write('Weighted-average F1 standard deviation: ' + str(wei_avg_stdev) + '\n')
+
+performance_file.write("Gaussian Naive Bayes Averages & Standard Deviations\na)\n")
+dostepeight(gnb_classifier)
+
+performance_file.write("Base Decision Tree Averages & Standard Deviations\nb)\n")
+dostepeight(base_dt_classifier)
+
+performance_file.write("Top Decision Tree Averages & Standard Deviations\nc)\n")
+dostepeight(top_dt_classifier)
+
+performance_file.write("Perceptron Averages & Standard Deviations\nd)\n")
+dostepeight(perceptron_classifier)
+
+performance_file.write("Base Multi-Layered Perceptron Averages & Standard Deviations\ne)\n")
+dostepeight(base_ml_perceptron_classifier)
+
+performance_file.write("Top Multi-Layered Perceptron Averages & Standard Deviations\nf)\n")
+dostepeight(top_ml_perceptron_classifier)
