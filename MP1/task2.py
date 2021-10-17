@@ -13,10 +13,10 @@ from sklearn.metrics import f1_score
 
 
 # Task 2.2
-drugfile = pd.read_csv('drug200.csv')
+drug_file = pd.read_csv('drug200.csv')
 
 # Task 2.3
-drug_array = np.array(drugfile["Drug"])
+drug_array = np.array(drug_file["Drug"])
 
 (unique_drug, frequency) = np.unique(drug_array, return_counts=True)
 
