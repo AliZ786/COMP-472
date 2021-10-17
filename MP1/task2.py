@@ -13,7 +13,7 @@ from sklearn.metrics import f1_score
 
 
 # Task 2.2
-drug_file = pd.read_csv('drug200.csv')
+drug_file = pd.read_csv('MP1/drug200.csv')
 
 # Task 2.3
 drug_array = np.array(drug_file["Drug"])
