@@ -23,8 +23,8 @@ drug_array = np.array(drug_file["Drug"])
 
 (unique_drug, frequency) = np.unique(drug_array, return_counts=True)
 
-#Plots chart showing the frequency of the drugs
-plt.plot(unique_drug, frequency, color='none', marker='o', markerfacecolor='blue', markersize=6)
+#Creates a bar chart showing the frequency of the drugs
+plt.bar(unique_drug, frequency, width = 0.8)
 
 plt.xlabel("Drug")
 plt.ylabel("Frequency")
