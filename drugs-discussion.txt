@@ -1,0 +1,9 @@
+8. The Gaussian Naive Bayes, Base-DT, Top-DT and Perceptron models all give the same performance everytime which can be clearly observed as the
+standard deviations for accuracy, macro-average F1 and weighted-average F1 of all those models were 0. This is due to the fact that we train 
+the same dataset and do not repeat the prior step 5. However, the Base-MLP and Top-MLP models give different performances everytime which can 
+be observed as the standard devations for accuracy, macro-average F1 and weighted-average F1 of both models resulted in values greater than 0.
+Although we still train on the same dataset and do not repeat prior steps to step 6, we are required to modify certain parameter values according
+to the provided instructions for Base-MLP and Top-MLP. One of those parameters is 'solver' which is required to be modified to stochastic gradient 
+descent. SGD is a way to train a model in which a few samples are selected at random rather than the whole dataset for each iteration, thus the 
+modification of the solver parameter to sgd for Base-MLP and Top-MLP explains why different performances are obtained for these 2 models for different 
+iterations.
