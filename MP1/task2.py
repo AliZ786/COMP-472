@@ -41,7 +41,7 @@ for index, data in enumerate(frequency):
 
 
 #Saves the figure to a PDF file
-plt.savefig("drug-distribution.pdf")
+# plt.savefig("drug-distribution.pdf")
 
 # Task 2.4
 drug_file["BP"] = pd.Categorical(drug_file["BP"], ['LOW', 'NORMAL', 'HIGH'], ordered=True)
@@ -164,6 +164,8 @@ f.write(separator)
 
 # Top-DT
 f.write("\nc) Top Decision Tree Classifier\n")
+f.write("Hyper-parameters: " +str(hyper_params) +"\n")
+f.write("It's best estimator are: " +str(top_dt_classifier.best_estimator_)+ "\n")
 dostepseven(top_dt_classifier)
 f.write(separator)
 
@@ -174,11 +176,14 @@ f.write(separator)
 
 # Base-MLP
 f.write("\ne) Base Multi-Layered Perceptron Classifier\n")
+f.write("The parameters used for this are: hidden_layer_sizes=(100,1), activation='logistic', solver='sgd', max_iter=5000\n")
 dostepseven(perceptron_classifier)
 f.write(separator)
 
 # Top-MLP
 f.write("\nf) Top Multi-Layered Perceptron Classifier\n")
+f.write("Hyper-parameters: " +str(params) +"\n")
+f.write("It's best estimator are: " +str(top_ml_perceptron_classifier.best_estimator_) +"\n")
 dostepseven(top_ml_perceptron_classifier)
 f.write(separator)
 
@@ -193,11 +198,12 @@ def dostepeight(classifier_obj):
 	wei_avg=[]
 
 	for x in range(10):
+		# print("Step 8, loop " +str(x+1))
 		classifier_obj.fit(X_train, y_train)
 		acc.append(accuracy_score(y_test, classifier_obj.predict(X_test)))
 		mac_avg.append(f1_score(y_test, classifier_obj.predict(X_test), average='macro'))
 		wei_avg.append(f1_score(y_test, classifier_obj.predict(X_test), average='weighted'))
-		# print("Step 8, loop " +str(x+1))
+		
 
 
 	acc_avg = sum(acc) / len(acc)
