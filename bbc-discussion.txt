@@ -11,7 +11,7 @@ b)
 
     For step 9: We train the same dataset here as step 7, however we do change one of the hyper-parameters here, the smoothing value. In this case, the smoothing
                 value is set 0.0001. The values of the log probabilities decrease because of the increased denominator (albeit only by a factor of 1/10000). The values of 
-                all accuracy, macro average, and weighted average was a slighty worse (0.002) than that of step 7.
+                all accuracy, macro average, and weighted average was a slighty better (0.04) than that of step 7.
 
     For task 10: The performance is very similar to task 7, as the change in the smoothing value, from 1 to 0.9 is very minimal. The values for all the log probabilities,
                  accuracy, macro average, and the weighted average is the same. Although there might be some changes to these values, they are at a power which is not able
