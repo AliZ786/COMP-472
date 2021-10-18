@@ -65,7 +65,7 @@ for index, data in enumerate(y):
     plt.text(x=index, y=data+1, s=f"{data}",
              fontdict=dict(fontsize=12, color='maroon'))
 
-plt.savefig('BBC-distribution.pdf')
+# plt.savefig('BBC-distribution.pdf')
 
  # Task 1.3
 

@@ -1,234 +1,535 @@
-Gaussian Naive Bayes Classifier
-a)
-9|0|0|0|0
-0|4|0|0|0
-0|0|4|0|0
-0|0|0|11|0
-5|1|6|1|9
+
+a) Gaussian Naive Bayes Classifier
+
+Confusion Matrix
++-------+---------+---------+---------+---------+---------+
+|       |   DrugA |   DrugB |   DrugC |   DrugX |   DrugY |
++=======+=========+=========+=========+=========+=========+
+| DrugA |       9 |       1 |       0 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugB |       0 |       3 |       0 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugC |       0 |       0 |       1 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugX |       0 |       0 |       0 |      10 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugY |       5 |       2 |       0 |       5 |      14 |
++-------+---------+---------+---------+---------+---------+
+
 Precision Measures by Class
-DrugA:0.64	
-DrugB:0.80	
-DrugC:0.40	
-DrugX:0.92	
-DrugY:1.00	
++---------+-------------+
+| Class   |   Precision |
++=========+=============+
+| DrugA   |        0.64 |
++---------+-------------+
+| DrugB   |         0.5 |
++---------+-------------+
+| DrugC   |           1 |
++---------+-------------+
+| DrugX   |        0.67 |
++---------+-------------+
+| DrugY   |           1 |
++---------+-------------+
+
 Recall Measures by Class
-DrugA:1.00	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:0.41	
++---------+----------+
+| Class   |   Recall |
++=========+==========+
+| DrugA   |      0.9 |
++---------+----------+
+| DrugB   |        1 |
++---------+----------+
+| DrugC   |        1 |
++---------+----------+
+| DrugX   |        1 |
++---------+----------+
+| DrugY   |     0.54 |
++---------+----------+
+
 F1 Measures by Class
-DrugA:0.78	
-DrugB:0.89	
-DrugC:0.57	
-DrugX:0.96	
-DrugY:0.58	
++---------+------------+
+| Class   |   F1-Score |
++=========+============+
+| DrugA   |       0.75 |
++---------+------------+
+| DrugB   |       0.67 |
++---------+------------+
+| DrugC   |          1 |
++---------+------------+
+| DrugX   |        0.8 |
++---------+------------+
+| DrugY   |        0.7 |
++---------+------------+
 
-Accuracy of the model: 0.74
-Macro-average F1 of the model: 0.7560186112780782
-Weighted-average F1 of the model: 0.7236136156192258
-----------------------------------------------
+Accuracy, Macro-Average F1, and the Weighted-Averaged F1 of the Model
++---------------------+----------+
+| Accuracy            | 0.74     |
++---------------------+----------+
+| Macro-Average F1    | 0.783333 |
++---------------------+----------+
+| Weighted-Average F1 | 0.734    |
++---------------------+----------+
 
-Base Decision Tree Classifier
-b)
-9|0|0|0|0
-0|4|0|0|0
-0|0|4|0|0
-0|0|0|11|0
-0|0|0|0|22
+*****************************************
+
+
+b) Base Decision Tree Classifier
+
+Confusion Matrix
++-------+---------+---------+---------+---------+---------+
+|       |   DrugA |   DrugB |   DrugC |   DrugX |   DrugY |
++=======+=========+=========+=========+=========+=========+
+| DrugA |      10 |       0 |       0 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugB |       0 |       3 |       0 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugC |       0 |       0 |       1 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugX |       0 |       0 |       0 |      10 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugY |       0 |       0 |       0 |       0 |      26 |
++-------+---------+---------+---------+---------+---------+
+
 Precision Measures by Class
-DrugA:1.00	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:1.00	
++---------+-------------+
+| Class   |   Precision |
++=========+=============+
+| DrugA   |           1 |
++---------+-------------+
+| DrugB   |           1 |
++---------+-------------+
+| DrugC   |           1 |
++---------+-------------+
+| DrugX   |           1 |
++---------+-------------+
+| DrugY   |           1 |
++---------+-------------+
+
 Recall Measures by Class
-DrugA:1.00	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:1.00	
++---------+----------+
+| Class   |   Recall |
++=========+==========+
+| DrugA   |        1 |
++---------+----------+
+| DrugB   |        1 |
++---------+----------+
+| DrugC   |        1 |
++---------+----------+
+| DrugX   |        1 |
++---------+----------+
+| DrugY   |        1 |
++---------+----------+
+
 F1 Measures by Class
-DrugA:1.00	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:1.00	
++---------+------------+
+| Class   |   F1-Score |
++=========+============+
+| DrugA   |          1 |
++---------+------------+
+| DrugB   |          1 |
++---------+------------+
+| DrugC   |          1 |
++---------+------------+
+| DrugX   |          1 |
++---------+------------+
+| DrugY   |          1 |
++---------+------------+
 
-Accuracy of the model: 1.0
-Macro-average F1 of the model: 1.0
-Weighted-average F1 of the model: 1.0
-----------------------------------------------
+Accuracy, Macro-Average F1, and the Weighted-Averaged F1 of the Model
++---------------------+---+
+| Accuracy            | 1 |
++---------------------+---+
+| Macro-Average F1    | 1 |
++---------------------+---+
+| Weighted-Average F1 | 1 |
++---------------------+---+
 
-Top Decision Tree Classifier
-c)
-9|0|0|0|0
-0|4|0|0|0
-0|0|4|0|0
-0|0|0|11|0
-0|0|0|0|22
+*****************************************
+
+
+c) Top Decision Tree Classifier
+
+Confusion Matrix
++-------+---------+---------+---------+---------+---------+
+|       |   DrugA |   DrugB |   DrugC |   DrugX |   DrugY |
++=======+=========+=========+=========+=========+=========+
+| DrugA |      10 |       0 |       0 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugB |       0 |       3 |       0 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugC |       0 |       0 |       1 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugX |       0 |       0 |       0 |      10 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugY |       0 |       0 |       0 |       0 |      26 |
++-------+---------+---------+---------+---------+---------+
+
 Precision Measures by Class
-DrugA:1.00	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:1.00	
++---------+-------------+
+| Class   |   Precision |
++=========+=============+
+| DrugA   |           1 |
++---------+-------------+
+| DrugB   |           1 |
++---------+-------------+
+| DrugC   |           1 |
++---------+-------------+
+| DrugX   |           1 |
++---------+-------------+
+| DrugY   |           1 |
++---------+-------------+
+
 Recall Measures by Class
-DrugA:1.00	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:1.00	
++---------+----------+
+| Class   |   Recall |
++=========+==========+
+| DrugA   |        1 |
++---------+----------+
+| DrugB   |        1 |
++---------+----------+
+| DrugC   |        1 |
++---------+----------+
+| DrugX   |        1 |
++---------+----------+
+| DrugY   |        1 |
++---------+----------+
+
 F1 Measures by Class
-DrugA:1.00	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:1.00	
++---------+------------+
+| Class   |   F1-Score |
++=========+============+
+| DrugA   |          1 |
++---------+------------+
+| DrugB   |          1 |
++---------+------------+
+| DrugC   |          1 |
++---------+------------+
+| DrugX   |          1 |
++---------+------------+
+| DrugY   |          1 |
++---------+------------+
 
-Accuracy of the model: 1.0
-Macro-average F1 of the model: 1.0
-Weighted-average F1 of the model: 1.0
-----------------------------------------------
+Accuracy, Macro-Average F1, and the Weighted-Averaged F1 of the Model
++---------------------+---+
+| Accuracy            | 1 |
++---------------------+---+
+| Macro-Average F1    | 1 |
++---------------------+---+
+| Weighted-Average F1 | 1 |
++---------------------+---+
 
-Perceptron Classifier
-d)
-0|0|9|0|0
-0|0|4|0|0
-0|0|4|0|0
-0|0|8|0|3
-0|0|8|0|14
+*****************************************
+
+
+d) Perceptron Classifier
+
+Confusion Matrix
++-------+---------+---------+---------+---------+---------+
+|       |   DrugA |   DrugB |   DrugC |   DrugX |   DrugY |
++=======+=========+=========+=========+=========+=========+
+| DrugA |       0 |       0 |       0 |       4 |       6 |
++-------+---------+---------+---------+---------+---------+
+| DrugB |       0 |       0 |       0 |       3 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugC |       0 |       0 |       0 |       0 |       1 |
++-------+---------+---------+---------+---------+---------+
+| DrugX |       0 |       0 |       0 |       9 |       1 |
++-------+---------+---------+---------+---------+---------+
+| DrugY |       0 |       0 |       0 |       1 |      25 |
++-------+---------+---------+---------+---------+---------+
+
 Precision Measures by Class
-DrugA:0.00	
-DrugB:0.00	
-DrugC:0.12	
-DrugX:0.00	
-DrugY:0.82	
++---------+-------------+
+| Class   |   Precision |
++=========+=============+
+| DrugA   |           0 |
++---------+-------------+
+| DrugB   |           0 |
++---------+-------------+
+| DrugC   |           0 |
++---------+-------------+
+| DrugX   |        0.53 |
++---------+-------------+
+| DrugY   |        0.76 |
++---------+-------------+
+
 Recall Measures by Class
-DrugA:0.00	
-DrugB:0.00	
-DrugC:1.00	
-DrugX:0.00	
-DrugY:0.64	
++---------+----------+
+| Class   |   Recall |
++=========+==========+
+| DrugA   |        0 |
++---------+----------+
+| DrugB   |        0 |
++---------+----------+
+| DrugC   |        0 |
++---------+----------+
+| DrugX   |      0.9 |
++---------+----------+
+| DrugY   |     0.96 |
++---------+----------+
+
 F1 Measures by Class
-DrugA:0.00	
-DrugB:0.00	
-DrugC:0.22	
-DrugX:0.00	
-DrugY:0.72	
++---------+------------+
+| Class   |   F1-Score |
++=========+============+
+| DrugA   |          0 |
++---------+------------+
+| DrugB   |          0 |
++---------+------------+
+| DrugC   |          0 |
++---------+------------+
+| DrugX   |       0.67 |
++---------+------------+
+| DrugY   |       0.85 |
++---------+------------+
 
-Accuracy of the model: 0.36
-Macro-average F1 of the model: 0.18683298683298682
-Weighted-average F1 of the model: 0.33319473319473325
-----------------------------------------------
+Accuracy, Macro-Average F1, and the Weighted-Averaged F1 of the Model
++---------------------+----------+
+| Accuracy            | 0.68     |
++---------------------+----------+
+| Macro-Average F1    | 0.302825 |
++---------------------+----------+
+| Weighted-Average F1 | 0.574011 |
++---------------------+----------+
 
-Base Multi-Layered Perceptron Classifier
-e)
-0|0|9|0|0
-0|0|4|0|0
-0|0|4|0|0
-0|0|8|0|3
-0|0|8|0|14
+*****************************************
+
+
+e) Base Multi-Layered Perceptron Classifier
+
+Confusion Matrix
++-------+---------+---------+---------+---------+---------+
+|       |   DrugA |   DrugB |   DrugC |   DrugX |   DrugY |
++=======+=========+=========+=========+=========+=========+
+| DrugA |       0 |       0 |       0 |       4 |       6 |
++-------+---------+---------+---------+---------+---------+
+| DrugB |       0 |       0 |       0 |       3 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugC |       0 |       0 |       0 |       0 |       1 |
++-------+---------+---------+---------+---------+---------+
+| DrugX |       0 |       0 |       0 |       9 |       1 |
++-------+---------+---------+---------+---------+---------+
+| DrugY |       0 |       0 |       0 |       1 |      25 |
++-------+---------+---------+---------+---------+---------+
+
 Precision Measures by Class
-DrugA:0.00	
-DrugB:0.00	
-DrugC:0.12	
-DrugX:0.00	
-DrugY:0.82	
++---------+-------------+
+| Class   |   Precision |
++=========+=============+
+| DrugA   |           0 |
++---------+-------------+
+| DrugB   |           0 |
++---------+-------------+
+| DrugC   |           0 |
++---------+-------------+
+| DrugX   |        0.53 |
++---------+-------------+
+| DrugY   |        0.76 |
++---------+-------------+
+
 Recall Measures by Class
-DrugA:0.00	
-DrugB:0.00	
-DrugC:1.00	
-DrugX:0.00	
-DrugY:0.64	
++---------+----------+
+| Class   |   Recall |
++=========+==========+
+| DrugA   |        0 |
++---------+----------+
+| DrugB   |        0 |
++---------+----------+
+| DrugC   |        0 |
++---------+----------+
+| DrugX   |      0.9 |
++---------+----------+
+| DrugY   |     0.96 |
++---------+----------+
+
 F1 Measures by Class
-DrugA:0.00	
-DrugB:0.00	
-DrugC:0.22	
-DrugX:0.00	
-DrugY:0.72	
++---------+------------+
+| Class   |   F1-Score |
++=========+============+
+| DrugA   |          0 |
++---------+------------+
+| DrugB   |          0 |
++---------+------------+
+| DrugC   |          0 |
++---------+------------+
+| DrugX   |       0.67 |
++---------+------------+
+| DrugY   |       0.85 |
++---------+------------+
 
-Accuracy of the model: 0.36
-Macro-average F1 of the model: 0.18683298683298682
-Weighted-average F1 of the model: 0.33319473319473325
-----------------------------------------------
+Accuracy, Macro-Average F1, and the Weighted-Averaged F1 of the Model
++---------------------+----------+
+| Accuracy            | 0.68     |
++---------------------+----------+
+| Macro-Average F1    | 0.302825 |
++---------------------+----------+
+| Weighted-Average F1 | 0.574011 |
++---------------------+----------+
 
-Top Multi-Layered Perceptron Classifier
-f)
-8|1|0|0|0
-0|4|0|0|0
-0|0|4|0|0
-0|0|0|10|1
-0|1|0|0|21
+*****************************************
+
+
+f) Top Multi-Layered Perceptron Classifier
+
+Confusion Matrix
++-------+---------+---------+---------+---------+---------+
+|       |   DrugA |   DrugB |   DrugC |   DrugX |   DrugY |
++=======+=========+=========+=========+=========+=========+
+| DrugA |       3 |       4 |       1 |       0 |       2 |
++-------+---------+---------+---------+---------+---------+
+| DrugB |       0 |       3 |       0 |       0 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugC |       0 |       0 |       0 |       0 |       1 |
++-------+---------+---------+---------+---------+---------+
+| DrugX |       0 |       0 |       0 |      10 |       0 |
++-------+---------+---------+---------+---------+---------+
+| DrugY |       0 |       1 |       0 |       1 |      24 |
++-------+---------+---------+---------+---------+---------+
+
 Precision Measures by Class
-DrugA:1.00	
-DrugB:0.67	
-DrugC:1.00	
-DrugX:1.00	
-DrugY:0.95	
++---------+-------------+
+| Class   |   Precision |
++=========+=============+
+| DrugA   |           1 |
++---------+-------------+
+| DrugB   |        0.38 |
++---------+-------------+
+| DrugC   |           0 |
++---------+-------------+
+| DrugX   |        0.91 |
++---------+-------------+
+| DrugY   |        0.89 |
++---------+-------------+
+
 Recall Measures by Class
-DrugA:0.89	
-DrugB:1.00	
-DrugC:1.00	
-DrugX:0.91	
-DrugY:0.95	
++---------+----------+
+| Class   |   Recall |
++=========+==========+
+| DrugA   |      0.3 |
++---------+----------+
+| DrugB   |        1 |
++---------+----------+
+| DrugC   |        0 |
++---------+----------+
+| DrugX   |        1 |
++---------+----------+
+| DrugY   |     0.92 |
++---------+----------+
+
 F1 Measures by Class
-DrugA:0.94	
-DrugB:0.80	
-DrugC:1.00	
-DrugX:0.95	
-DrugY:0.95	
++---------+------------+
+| Class   |   F1-Score |
++=========+============+
+| DrugA   |       0.46 |
++---------+------------+
+| DrugB   |       0.55 |
++---------+------------+
+| DrugC   |          0 |
++---------+------------+
+| DrugX   |       0.95 |
++---------+------------+
+| DrugY   |       0.91 |
++---------+------------+
 
-Accuracy of the model: 0.94
-Macro-average F1 of the model: 0.9296205755029284
-Weighted-average F1 of the model: 0.9429355742296919
-----------------------------------------------
+Accuracy, Macro-Average F1, and the Weighted-Averaged F1 of the Model
++---------------------+----------+
+| Accuracy            | 0.8      |
++---------------------+----------+
+| Macro-Average F1    | 0.573007 |
++---------------------+----------+
+| Weighted-Average F1 | 0.786455 |
++---------------------+----------+
 
-Gaussian Naive Bayes Averages & Standard Deviations
-a)
-Average accuracy: 0.7400000000000001
-Accuracy standard deviation: 0.0
-Average macro-average F1: 0.7560186112780781
-Macro-average F1 standard deviation: 0.0
-Average weighted-average F1: 0.7236136156192259
-Weighted-average F1 standard deviation: 0.0
-Base Decision Tree Averages & Standard Deviations
-b)
-Average accuracy: 1.0
-Accuracy standard deviation: 0.0
-Average macro-average F1: 1.0
-Macro-average F1 standard deviation: 0.0
-Average weighted-average F1: 1.0
-Weighted-average F1 standard deviation: 0.0
-Top Decision Tree Averages & Standard Deviations
-c)
-Average accuracy: 1.0
-Accuracy standard deviation: 0.0
-Average macro-average F1: 1.0
-Macro-average F1 standard deviation: 0.0
-Average weighted-average F1: 1.0
-Weighted-average F1 standard deviation: 0.0
-Perceptron Averages & Standard Deviations
-d)
-Average accuracy: 0.35999999999999993
-Accuracy standard deviation: 0.0
-Average macro-average F1: 0.1868329868329868
-Macro-average F1 standard deviation: 0.0
-Average weighted-average F1: 0.3331947331947332
-Weighted-average F1 standard deviation: 0.0
-Base Multi-Layered Perceptron Averages & Standard Deviations
-e)
-Average accuracy: 0.374
-Accuracy standard deviation: 0.10627009613872256
-Average macro-average F1: 0.10719489981785064
-Macro-average F1 standard deviation: 0.024196287827577996
-Average weighted-average F1: 0.21202550091074687
-Weighted-average F1 standard deviation: 0.09155875313955515
-Top Multi-Layered Perceptron Averages & Standard Deviations
-f)
-Average accuracy: 0.9179999999999999
-Accuracy standard deviation: 0.028982753492378856
-Average macro-average F1: 0.8962697607645564
-Macro-average F1 standard deviation: 0.050817015227901996
-Average weighted-average F1: 0.9178629171115699
-Weighted-average F1 standard deviation: 0.03207553616198961
+*****************************************
+
+
+
+a) Gaussian Naive Bayes Averages & Standard Deviations
++----------------------------------------+----------+
+| Average accuracy                       | 0.74     |
++----------------------------------------+----------+
+| Accuracy standard deviation            | 0        |
++----------------------------------------+----------+
+| Average macro-average F1               | 0.783333 |
++----------------------------------------+----------+
+| Macro-average F1 standard deviation    | 0        |
++----------------------------------------+----------+
+| Average weighted-average F1            | 0.734    |
++----------------------------------------+----------+
+| Weighted-average F1 standard deviation | 0        |
++----------------------------------------+----------+
+
+b) Base Decision Tree Averages & Standard Deviations
++----------------------------------------+---+
+| Average accuracy                       | 1 |
++----------------------------------------+---+
+| Accuracy standard deviation            | 0 |
++----------------------------------------+---+
+| Average macro-average F1               | 1 |
++----------------------------------------+---+
+| Macro-average F1 standard deviation    | 0 |
++----------------------------------------+---+
+| Average weighted-average F1            | 1 |
++----------------------------------------+---+
+| Weighted-average F1 standard deviation | 0 |
++----------------------------------------+---+
+
+c) Top Decision Tree Averages & Standard Deviations
++----------------------------------------+---+
+| Average accuracy                       | 1 |
++----------------------------------------+---+
+| Accuracy standard deviation            | 0 |
++----------------------------------------+---+
+| Average macro-average F1               | 1 |
++----------------------------------------+---+
+| Macro-average F1 standard deviation    | 0 |
++----------------------------------------+---+
+| Average weighted-average F1            | 1 |
++----------------------------------------+---+
+| Weighted-average F1 standard deviation | 0 |
++----------------------------------------+---+
+
+d) Perceptron Averages & Standard Deviations
++----------------------------------------+----------+
+| Average accuracy                       | 0.68     |
++----------------------------------------+----------+
+| Accuracy standard deviation            | 0        |
++----------------------------------------+----------+
+| Average macro-average F1               | 0.302825 |
++----------------------------------------+----------+
+| Macro-average F1 standard deviation    | 0        |
++----------------------------------------+----------+
+| Average weighted-average F1            | 0.574011 |
++----------------------------------------+----------+
+| Weighted-average F1 standard deviation | 0        |
++----------------------------------------+----------+
+
+e) Base Multi-Layered Perceptron Averages & Standard Deviations
++----------------------------------------+-----------+
+| Average accuracy                       | 0.53      |
++----------------------------------------+-----------+
+| Accuracy standard deviation            | 0.0316228 |
++----------------------------------------+-----------+
+| Average macro-average F1               | 0.149971  |
++----------------------------------------+-----------+
+| Macro-average F1 standard deviation    | 0.0415175 |
++----------------------------------------+-----------+
+| Average weighted-average F1            | 0.371639  |
++----------------------------------------+-----------+
+| Weighted-average F1 standard deviation | 0.0501209 |
++----------------------------------------+-----------+
+
+f) Top Multi-Layered Perceptron Averages & Standard Deviations
++----------------------------------------+-----------+
+| Average accuracy                       | 0.85      |
++----------------------------------------+-----------+
+| Accuracy standard deviation            | 0.0270801 |
++----------------------------------------+-----------+
+| Average macro-average F1               | 0.755275  |
++----------------------------------------+-----------+
+| Macro-average F1 standard deviation    | 0.0993414 |
++----------------------------------------+-----------+
+| Average weighted-average F1            | 0.845485  |
++----------------------------------------+-----------+
+| Weighted-average F1 standard deviation | 0.0344253 |
++----------------------------------------+-----------+
