@@ -1,0 +1,18 @@
+a) From step 2, we determined that the number of instances in each class are very close to each other. Based on this, we could not definitively say that one class
+was more important that the other, as they all held equal value of importance. By this statement, we can say that the best metric to evaluate this dataset is accuracy.
+We would want to identify the correct instances in the test set without the need of seperating each class by itself. However, if we want to group this class by class, the best
+metric would be precision, since then we would care about how many instances of a class that we have in another class (for example, we would go the politics section of the newspaper
+to find entertainment, and not care if find any politics at all). Hence if we do deem that some classes are more important than others, then precision would be the best metric. 
+
+
+b) 
+    For step 8: The performance is exactly the same as step 7, because we train the same dataset, and do not add any hyper-parameters, which would modify
+                the data in any way. Hence, the performance for step 7 and step 8 is the same.
+
+    For step 9: We train the same dataset here as step 7, however we do change one of the hyper-parameters here, the smoothing value. In this case, the smoothing
+                value is set 0.0001. The values of the log probabilities decrease because of the increased denominator (albeit only by a factor of 1/10000). The values of 
+                all accuracy, macro average, and weighted average was a slighty worse (0.002) than that of step 7.
+
+    For task 10: The performance is very similar to task 7, as the change in the smoothing value, from 1 to 0.9 is very minimal. The values for all the log probabilities,
+                 accuracy, macro average, and the weighted average is the same. Although there might be some changes to these values, they are at a power which is not able
+                 to be displayed on our machine (like 10^ -6 for example).
