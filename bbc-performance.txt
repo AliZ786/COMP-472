@@ -3,58 +3,58 @@
 (a) ****** MultinomialNB default values, try 1 ******
 
 
-(b) ******* Confusion Matrix ******
+(b) Confusion Matrix 
 +---------------+------------+-----------------+------------+----------+--------+
 |               |   Business |   Entertainment |   Politics |   Sports |   Tech |
 +===============+============+=================+============+==========+========+
-|   Business    |        101 |               0 |          2 |        0 |      4 |
+|   Business    |         99 |               0 |          3 |        0 |      3 |
 +---------------+------------+-----------------+------------+----------+--------+
-| Entertainment |          1 |              75 |          0 |        0 |      1 |
+| Entertainment |          0 |              78 |          1 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|   Politics    |          1 |               0 |         91 |        0 |      0 |
+|   Politics    |          0 |               0 |         79 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|    Sports     |          1 |               0 |          0 |       90 |      0 |
+|    Sports     |          0 |               0 |          1 |       98 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|     Tech      |          0 |               0 |          0 |        0 |     78 |
+|     Tech      |          2 |               0 |          1 |        0 |     80 |
 +---------------+------------+-----------------+------------+----------+--------+
 
-(c) ****** Precision, recall, and F1-measure for each class *******
+(c) Precision, recall, and F1-measure for each class 
 +--+--------------------------------------------------------+
 |  |                precision    recall  f1-score   support |
 |  |                                                        |
-|  |      business       0.97      0.94      0.96       107 |
-|  | entertainment       1.00      0.97      0.99        77 |
-|  |      politics       0.98      0.99      0.98        92 |
-|  |         sport       1.00      0.99      0.99        91 |
-|  |          tech       0.94      1.00      0.97        78 |
+|  |      business       0.98      0.94      0.96       105 |
+|  | entertainment       1.00      0.99      0.99        79 |
+|  |      politics       0.93      1.00      0.96        79 |
+|  |         sport       1.00      0.99      0.99        99 |
+|  |          tech       0.96      0.96      0.96        83 |
 |  |                                                        |
 |  |      accuracy                           0.98       445 |
-|  |     macro avg       0.98      0.98      0.98       445 |
+|  |     macro avg       0.97      0.98      0.98       445 |
 |  |  weighted avg       0.98      0.98      0.98       445 |
 +--+--------------------------------------------------------+
 
-(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******
+(d) Accuracy, Macro-average F1 and Weighted-average F1 of the model 
 +---------------------+----------+
-| Accuracy_score      | 0.977528 |
+| Accuracy_score      | 0.975281 |
 +---------------------+----------+
-| Macro-average F1    | 0.978278 |
+| Macro-average F1    | 0.975398 |
 +---------------------+----------+
-| Weighted-average F1 | 0.977541 |
+| Weighted-average F1 | 0.97534  |
 +---------------------+----------+
 
-(e) ****** The prior probabilities of each class *******
+(e) The prior probabilities of each class 
 +---------------+---------------+
 | Class         |   Probability |
 +===============+===============+
-| Business      |      0.240449 |
+| Business      |      0.235955 |
 +---------------+---------------+
-| Entertainment |      0.175281 |
+| Entertainment |      0.177528 |
 +---------------+---------------+
-| Politics      |      0.173034 |
+| Politics      |      0.177528 |
 +---------------+---------------+
-| Sports        |      0.204494 |
+| Sports        |      0.222472 |
 +---------------+---------------+
-| Tech          |      0.206742 |
+| Tech          |      0.186517 |
 +---------------+---------------+
 
 (f) The size in the vocabulary is: 29421
@@ -93,8 +93,8 @@
 
 (j) Number and percentage of words with a frequency of one in entire corpus :
  
- Number of words: 4072
- Percentage of words: 13.84 %
+ Number of words: 10005
+ Percentage of words: 34.01 %
 
 
 (k) 2 favourite words and their log prob:
@@ -103,87 +103,89 @@
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |   -11.7779 |
+| Business      |   -11.9842 |
 +---------------+------------+
-| Entertainment |   -11.9929 |
+| Entertainment |   -11.7843 |
 +---------------+------------+
-| Politics      |   -11.9876 |
+| Politics      |   -10.6886 |
 +---------------+------------+
-| Sports        |   -10.6921 |
+| Sports        |   -11.9974 |
 +---------------+------------+
-| Tech          |   -11.0419 |
+| Tech          |   -10.756  |
 +---------------+------------+
 
 Favourite word 2: zombies
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |   -9.94333 |
+| Business      |   -11.9842 |
 +---------------+------------+
-| Entertainment |  -12.0783  |
+| Entertainment |   -11.7843 |
 +---------------+------------+
-| Politics      |  -11.7779  |
+| Politics      |   -12.0749 |
 +---------------+------------+
-| Sports        |  -11.9929  |
+| Sports        |   -11.9974 |
 +---------------+------------+
-| Tech          |  -11.9876  |
+| Tech          |   -10.1964 |
 +---------------+------------+
+
+***********************************************************************
 
 (a) ****** MultinomialNB default values, try 2 ******
 
 
-(b) ******* Confusion Matrix ******
+(b) Confusion Matrix 
 +---------------+------------+-----------------+------------+----------+--------+
 |               |   Business |   Entertainment |   Politics |   Sports |   Tech |
 +===============+============+=================+============+==========+========+
-|   Business    |        101 |               0 |          2 |        0 |      4 |
+|   Business    |         99 |               0 |          3 |        0 |      3 |
 +---------------+------------+-----------------+------------+----------+--------+
-| Entertainment |          1 |              75 |          0 |        0 |      1 |
+| Entertainment |          0 |              78 |          1 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|   Politics    |          1 |               0 |         91 |        0 |      0 |
+|   Politics    |          0 |               0 |         79 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|    Sports     |          1 |               0 |          0 |       90 |      0 |
+|    Sports     |          0 |               0 |          1 |       98 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|     Tech      |          0 |               0 |          0 |        0 |     78 |
+|     Tech      |          2 |               0 |          1 |        0 |     80 |
 +---------------+------------+-----------------+------------+----------+--------+
 
-(c) ****** Precision, recall, and F1-measure for each class *******
+(c) Precision, recall, and F1-measure for each class 
 +--+--------------------------------------------------------+
 |  |                precision    recall  f1-score   support |
 |  |                                                        |
-|  |      business       0.97      0.94      0.96       107 |
-|  | entertainment       1.00      0.97      0.99        77 |
-|  |      politics       0.98      0.99      0.98        92 |
-|  |         sport       1.00      0.99      0.99        91 |
-|  |          tech       0.94      1.00      0.97        78 |
+|  |      business       0.98      0.94      0.96       105 |
+|  | entertainment       1.00      0.99      0.99        79 |
+|  |      politics       0.93      1.00      0.96        79 |
+|  |         sport       1.00      0.99      0.99        99 |
+|  |          tech       0.96      0.96      0.96        83 |
 |  |                                                        |
 |  |      accuracy                           0.98       445 |
-|  |     macro avg       0.98      0.98      0.98       445 |
+|  |     macro avg       0.97      0.98      0.98       445 |
 |  |  weighted avg       0.98      0.98      0.98       445 |
 +--+--------------------------------------------------------+
 
-(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******
+(d) Accuracy, Macro-average F1 and Weighted-average F1 of the model 
 +---------------------+----------+
-| Accuracy_score      | 0.977528 |
+| Accuracy_score      | 0.975281 |
 +---------------------+----------+
-| Macro-average F1    | 0.978278 |
+| Macro-average F1    | 0.975398 |
 +---------------------+----------+
-| Weighted-average F1 | 0.977541 |
+| Weighted-average F1 | 0.97534  |
 +---------------------+----------+
 
-(e) ****** The prior probabilities of each class *******
+(e) The prior probabilities of each class 
 +---------------+---------------+
 | Class         |   Probability |
 +===============+===============+
-| Business      |      0.240449 |
+| Business      |      0.235955 |
 +---------------+---------------+
-| Entertainment |      0.175281 |
+| Entertainment |      0.177528 |
 +---------------+---------------+
-| Politics      |      0.173034 |
+| Politics      |      0.177528 |
 +---------------+---------------+
-| Sports        |      0.204494 |
+| Sports        |      0.222472 |
 +---------------+---------------+
-| Tech          |      0.206742 |
+| Tech          |      0.186517 |
 +---------------+---------------+
 
 (f) The size in the vocabulary is: 29421
@@ -222,8 +224,8 @@ Favourite word 2: zombies
 
 (j) Number and percentage of words with a frequency of one in entire corpus :
  
- Number of words: 4072
- Percentage of words: 13.84 %
+ Number of words: 10005
+ Percentage of words: 34.01 %
 
 
 (k) 2 favourite words and their log prob:
@@ -232,30 +234,30 @@ Favourite word 2: zombies
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |   -11.7779 |
+| Business      |   -11.9842 |
 +---------------+------------+
-| Entertainment |   -11.9929 |
+| Entertainment |   -11.7843 |
 +---------------+------------+
-| Politics      |   -11.9876 |
+| Politics      |   -10.6886 |
 +---------------+------------+
-| Sports        |   -10.6921 |
+| Sports        |   -11.9974 |
 +---------------+------------+
-| Tech          |   -11.0419 |
+| Tech          |   -10.756  |
 +---------------+------------+
 
 Favourite word 2: zombies
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |   -9.94333 |
+| Business      |   -11.9842 |
 +---------------+------------+
-| Entertainment |  -12.0783  |
+| Entertainment |   -11.7843 |
 +---------------+------------+
-| Politics      |  -11.7779  |
+| Politics      |   -12.0749 |
 +---------------+------------+
-| Sports        |  -11.9929  |
+| Sports        |   -11.9974 |
 +---------------+------------+
-| Tech          |  -11.9876  |
+| Tech          |   -10.1964 |
 +---------------+------------+
 
 ***********************************************************************
@@ -263,58 +265,58 @@ Favourite word 2: zombies
 (a) ****** MultinomialNB smoothing = [0.0001]  ******
 
 
-(b) ******* Confusion Matrix ******
+(b) Confusion Matrix 
 +---------------+------------+-----------------+------------+----------+--------+
 |               |   Business |   Entertainment |   Politics |   Sports |   Tech |
 +===============+============+=================+============+==========+========+
-|   Business    |        101 |               0 |          1 |        0 |      5 |
+|   Business    |         98 |               1 |          2 |        0 |      4 |
 +---------------+------------+-----------------+------------+----------+--------+
-| Entertainment |          1 |              75 |          0 |        0 |      1 |
+| Entertainment |          0 |              78 |          1 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|   Politics    |          1 |               0 |         91 |        0 |      0 |
+|   Politics    |          0 |               1 |         78 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|    Sports     |          2 |               0 |          0 |       89 |      0 |
+|    Sports     |          0 |               0 |          1 |       98 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|     Tech      |          0 |               0 |          0 |        0 |     78 |
+|     Tech      |          2 |               0 |          0 |        0 |     81 |
 +---------------+------------+-----------------+------------+----------+--------+
 
-(c) ****** Precision, recall, and F1-measure for each class *******
+(c) Precision, recall, and F1-measure for each class 
 +--+--------------------------------------------------------+
 |  |                precision    recall  f1-score   support |
 |  |                                                        |
-|  |      business       0.96      0.94      0.95       107 |
-|  | entertainment       1.00      0.97      0.99        77 |
-|  |      politics       0.99      0.99      0.99        92 |
-|  |         sport       1.00      0.98      0.99        91 |
-|  |          tech       0.93      1.00      0.96        78 |
+|  |      business       0.98      0.93      0.96       105 |
+|  | entertainment       0.97      0.99      0.98        79 |
+|  |      politics       0.95      0.99      0.97        79 |
+|  |         sport       1.00      0.99      0.99        99 |
+|  |          tech       0.95      0.98      0.96        83 |
 |  |                                                        |
-|  |      accuracy                           0.98       445 |
-|  |     macro avg       0.98      0.98      0.98       445 |
-|  |  weighted avg       0.98      0.98      0.98       445 |
+|  |      accuracy                           0.97       445 |
+|  |     macro avg       0.97      0.97      0.97       445 |
+|  |  weighted avg       0.97      0.97      0.97       445 |
 +--+--------------------------------------------------------+
 
-(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******
+(d) Accuracy, Macro-average F1 and Weighted-average F1 of the model 
 +---------------------+----------+
-| Accuracy_score      | 0.975281 |
+| Accuracy_score      | 0.973034 |
 +---------------------+----------+
-| Macro-average F1    | 0.976131 |
+| Macro-average F1    | 0.973077 |
 +---------------------+----------+
-| Weighted-average F1 | 0.97537  |
+| Weighted-average F1 | 0.972988 |
 +---------------------+----------+
 
-(e) ****** The prior probabilities of each class *******
+(e) The prior probabilities of each class 
 +---------------+---------------+
 | Class         |   Probability |
 +===============+===============+
-| Business      |      0.240449 |
+| Business      |      0.235955 |
 +---------------+---------------+
-| Entertainment |      0.175281 |
+| Entertainment |      0.177528 |
 +---------------+---------------+
-| Politics      |      0.173034 |
+| Politics      |      0.177528 |
 +---------------+---------------+
-| Sports        |      0.204494 |
+| Sports        |      0.222472 |
 +---------------+---------------+
-| Tech          |      0.206742 |
+| Tech          |      0.186517 |
 +---------------+---------------+
 
 (f) The size in the vocabulary is: 29421
@@ -353,8 +355,8 @@ Favourite word 2: zombies
 
 (j) Number and percentage of words with a frequency of one in entire corpus :
  
- Number of words: 4072
- Percentage of words: 13.84 %
+ Number of words: 10005
+ Percentage of words: 34.01 %
 
 
 (k) 2 favourite words and their log prob:
@@ -363,30 +365,30 @@ Favourite word 2: zombies
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |   -21.0022 |
+| Business      |   -20.9916 |
 +---------------+------------+
-| Entertainment |   -20.7325 |
+| Entertainment |   -20.7407 |
 +---------------+------------+
-| Politics      |   -20.9958 |
+| Politics      |   -10.7927 |
 +---------------+------------+
-| Sports        |   -11.2765 |
+| Sports        |   -21.0078 |
 +---------------+------------+
-| Tech          |   -10.7968 |
+| Tech          |   -10.8731 |
 +---------------+------------+
 
 Favourite word 2: zombies
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |  -21.1058  |
+| Business      |   -20.9916 |
 +---------------+------------+
-| Entertainment |  -20.7325  |
+| Entertainment |   -20.7407 |
 +---------------+------------+
-| Politics      |  -20.9958  |
+| Politics      |   -21.1017 |
 +---------------+------------+
-| Sports        |  -21.0022  |
+| Sports        |   -21.0078 |
 +---------------+------------+
-| Tech          |   -9.89025 |
+| Tech          |   -10.18   |
 +---------------+------------+
 
 ***********************************************************************
@@ -394,58 +396,58 @@ Favourite word 2: zombies
 (a) ****** MultinomialNB smoothing = [0.9]  ******
 
 
-(b) ******* Confusion Matrix ******
+(b) Confusion Matrix 
 +---------------+------------+-----------------+------------+----------+--------+
 |               |   Business |   Entertainment |   Politics |   Sports |   Tech |
 +===============+============+=================+============+==========+========+
-|   Business    |        101 |               0 |          2 |        0 |      4 |
+|   Business    |         99 |               0 |          3 |        0 |      3 |
 +---------------+------------+-----------------+------------+----------+--------+
-| Entertainment |          1 |              75 |          0 |        0 |      1 |
+| Entertainment |          0 |              78 |          1 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|   Politics    |          1 |               0 |         91 |        0 |      0 |
+|   Politics    |          0 |               0 |         79 |        0 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|    Sports     |          1 |               0 |          0 |       90 |      0 |
+|    Sports     |          0 |               0 |          1 |       98 |      0 |
 +---------------+------------+-----------------+------------+----------+--------+
-|     Tech      |          0 |               0 |          0 |        0 |     78 |
+|     Tech      |          2 |               0 |          1 |        0 |     80 |
 +---------------+------------+-----------------+------------+----------+--------+
 
-(c) ****** Precision, recall, and F1-measure for each class *******
+(c) Precision, recall, and F1-measure for each class 
 +--+--------------------------------------------------------+
 |  |                precision    recall  f1-score   support |
 |  |                                                        |
-|  |      business       0.97      0.94      0.96       107 |
-|  | entertainment       1.00      0.97      0.99        77 |
-|  |      politics       0.98      0.99      0.98        92 |
-|  |         sport       1.00      0.99      0.99        91 |
-|  |          tech       0.94      1.00      0.97        78 |
+|  |      business       0.98      0.94      0.96       105 |
+|  | entertainment       1.00      0.99      0.99        79 |
+|  |      politics       0.93      1.00      0.96        79 |
+|  |         sport       1.00      0.99      0.99        99 |
+|  |          tech       0.96      0.96      0.96        83 |
 |  |                                                        |
 |  |      accuracy                           0.98       445 |
-|  |     macro avg       0.98      0.98      0.98       445 |
+|  |     macro avg       0.97      0.98      0.98       445 |
 |  |  weighted avg       0.98      0.98      0.98       445 |
 +--+--------------------------------------------------------+
 
-(d) ****** Accuracy, Macro-average F1 and Weighted-average F1 of the model *******
+(d) Accuracy, Macro-average F1 and Weighted-average F1 of the model 
 +---------------------+----------+
-| Accuracy_score      | 0.977528 |
+| Accuracy_score      | 0.975281 |
 +---------------------+----------+
-| Macro-average F1    | 0.978278 |
+| Macro-average F1    | 0.975398 |
 +---------------------+----------+
-| Weighted-average F1 | 0.977541 |
+| Weighted-average F1 | 0.97534  |
 +---------------------+----------+
 
-(e) ****** The prior probabilities of each class *******
+(e) The prior probabilities of each class 
 +---------------+---------------+
 | Class         |   Probability |
 +===============+===============+
-| Business      |      0.240449 |
+| Business      |      0.235955 |
 +---------------+---------------+
-| Entertainment |      0.175281 |
+| Entertainment |      0.177528 |
 +---------------+---------------+
-| Politics      |      0.173034 |
+| Politics      |      0.177528 |
 +---------------+---------------+
-| Sports        |      0.204494 |
+| Sports        |      0.222472 |
 +---------------+---------------+
-| Tech          |      0.206742 |
+| Tech          |      0.186517 |
 +---------------+---------------+
 
 (f) The size in the vocabulary is: 29421
@@ -484,8 +486,11 @@ Favourite word 2: zombies
 
 (j) Number and percentage of words with a frequency of one in entire corpus :
  
- Number of words: 4072
- Percentage of words: 13.84 %
+
+(j) Number and percentage of words with a frequency of one in entire corpus :
+ 
+ Number of words: 10005
+ Percentage of words: 34.01 %
 
 
 (k) 2 favourite words and their log prob:
@@ -494,28 +499,28 @@ Favourite word 2: zombies
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |   -12.0798 |
+| Business      |   -12.071  |
 +---------------+------------+
-| Entertainment |   -11.06   |
+| Entertainment |   -11.867  |
 +---------------+------------+
-| Politics      |   -12.0745 |
+| Politics      |   -10.697  |
 +---------------+------------+
-| Sports        |   -11.8605 |
+| Sports        |   -12.0845 |
 +---------------+------------+
-| Tech          |   -10.7005 |
+| Tech          |   -10.7655 |
 +---------------+------------+
 
 Favourite word 2: zombies
 +---------------+------------+
 | Class         |   Log prob |
 +===============+============+
-| Business      |   -9.93867 |
+| Business      |   -12.071  |
 +---------------+------------+
-| Entertainment |  -12.1669  |
+| Entertainment |   -11.867  |
 +---------------+------------+
-| Politics      |  -12.0798  |
+| Politics      |   -12.1633 |
 +---------------+------------+
-| Sports        |  -12.0745  |
+| Sports        |   -12.0845 |
 +---------------+------------+
-| Tech          |  -11.8605  |
+| Tech          |   -10.195  |
 +---------------+------------+
