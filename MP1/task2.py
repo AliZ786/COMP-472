@@ -177,7 +177,7 @@ f.write(separator)
 # Base-MLP
 f.write("\ne) Base Multi-Layered Perceptron Classifier\n")
 f.write("The parameters used for this are: hidden_layer_sizes=(100,1), activation='logistic', solver='sgd', max_iter=5000\n")
-dostepseven(perceptron_classifier)
+dostepseven(base_ml_perceptron_classifier)
 f.write(separator)
 
 # Top-MLP
