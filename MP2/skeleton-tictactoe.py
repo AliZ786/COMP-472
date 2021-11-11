@@ -7,10 +7,35 @@ class Game:
 	ALPHABETA = 1
 	HUMAN = 2
 	AI = 3
+
+	# Required attributes
+	size = 0
+	num_bloc = 0
+	pos_bloc = 0
+	s = 0
+	d1 = 0
+	d2 = 0
+	t = 0
+	a = False
+	play_mode = 'AI-AI'
 	
 	# Number of white and black pieces on the board
 	num_X = 0
 	num_O = 0
+
+	# Parametrized constructor
+	def __init__(self, n, nb, pb, s, d1, d2, t, a, p_mode, recommend = True):
+		self.size = n
+		self.num_bloc = nb
+		self.pos_bloc = pb
+		self.s = s
+		self.d1 = d1
+		self.d2 = d2
+		self.t = t
+		self.a = a
+		self.play_mode = p_mode
+		self.initialize_game()
+		self.recommend = recommend
 
 	def __init__(self, recommend = True):
 		self.initialize_game()
