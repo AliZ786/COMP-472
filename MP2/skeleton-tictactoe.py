@@ -23,6 +23,10 @@ class Game:
 	num_X = 0
 	num_O = 0
 
+	def __init__(self, recommend = True):
+		self.initialize_game()
+		self.recommend = recommend
+
 	# Parametrized constructor
 	def __init__(self, n, nb, pb, s, d1, d2, t, a, p_mode, recommend = True):
 		self.size = n
@@ -36,10 +40,6 @@ class Game:
 		self.play_mode = p_mode
 		self.initialize_game()
 		self.recommend = recommend
-
-	def __init__(self, recommend = True):
-		self.initialize_game()
-		self.recommend = recommend
 		
 	def initialize_game(self):
 		self.current_state = [['.','.','.'],
@@ -50,14 +50,14 @@ class Game:
 
 	def draw_board(self):
 		print()
-		for y in range(0, 3):
-			for x in range(0, 3):
+		for y in range(0, self.size):
+			for x in range(0, self.size):
 				print(F'{self.current_state[x][y]}', end="")
 			print()
 		print()
 		
 	def is_valid(self, px, py):
-		if px < 0 or px > 2 or py < 0 or py > 2:
+		if px < 0 or px > self.size or py < 0 or py > self.size:
 			return False
 		elif self.current_state[px][py] != '.':
 			return False
@@ -66,30 +66,34 @@ class Game:
 
 	def is_end(self):
 		# Vertical win
-		for i in range(0, 3):
+		for i in range(0, self.size):
 			if (self.current_state[0][i] != '.' and
 				self.current_state[0][i] == self.current_state[1][i] and
 				self.current_state[1][i] == self.current_state[2][i]):
 				return self.current_state[0][i]
+		
 		# Horizontal win
-		for i in range(0, 3):
+		for i in range(0, self.size):
 			if (self.current_state[i] == ['X', 'X', 'X']):
 				return 'X'
 			elif (self.current_state[i] == ['O', 'O', 'O']):
 				return 'O'
+		
 		# Main diagonal win
 		if (self.current_state[0][0] != '.' and
 			self.current_state[0][0] == self.current_state[1][1] and
 			self.current_state[0][0] == self.current_state[2][2]):
 			return self.current_state[0][0]
+		
 		# Second diagonal win
 		if (self.current_state[0][2] != '.' and
 			self.current_state[0][2] == self.current_state[1][1] and
 			self.current_state[0][2] == self.current_state[2][0]):
 			return self.current_state[0][2]
+		
 		# Is whole board full?
-		for i in range(0, 3):
-			for j in range(0, 3):
+		for i in range(0, self.size):
+			for j in range(0, self.size):
 				# There's an empty field, we continue the game
 				if (self.current_state[i][j] == '.'):
 					return None
@@ -237,6 +241,9 @@ class Game:
 				else:
 					(m, x, y) = self.alphabeta(max=True)
 			end = time.time()
+			elapsed_t = end - start
+			if (elapsed_t > self.t):
+				print(F'Player {self.player_turn} is eliminated for taking too much time to return a move.')
 			if (self.player_turn == 'X' and player_x == self.HUMAN) or (self.player_turn == 'O' and player_o == self.HUMAN):
 					if self.recommend:
 						print(F'Evaluation time: {round(end - start, 7)}s')
@@ -250,8 +257,8 @@ class Game:
 	
 	# Determining number of white pieces
 	def num_white(self):
-		for i in range(0, 3):
-			for j in range(0, 3):
+		for i in range(0, self.size):
+			for j in range(0, self.size):
 				if (self.current_state[i][j] == 'X'):
 					num_X = num_X + 1
 				else:
@@ -260,8 +267,8 @@ class Game:
 
 	# Determining number of black pieces
 	def num_black(self):
-		for i in range(0, 3):
-			for j in range(0, 3):
+		for i in range(0, self.size):
+			for j in range(0, self.size):
 				if (self.current_state[i][j] == 'O'):
 					num_O = num_O + 1
 				else:
@@ -274,7 +281,8 @@ class Game:
 		return e
 
 def main():
-	g = Game(recommend=True)
+	# g = Game(recommend=True)
+	g = Game(3, 4, 0, 4, 2, 2, 2.0, True, 'AI-AI', recommend=True)
 	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
 
