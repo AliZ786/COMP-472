@@ -28,9 +28,9 @@ class Game:
 		self.recommend = recommend
 
 	# Parametrized constructor
-	def __init__(self, n, nb, pb, s, d1, d2, t, a, p_mode, recommend = True):
+	def __init__(self, n, b, pb, s, d1, d2, t, a, p_mode, recommend = True):
 		self.size = n
-		self.num_bloc = nb
+		self.num_bloc = b
 		self.pos_bloc = pb
 		self.s = s
 		self.d1 = d1
@@ -282,9 +282,28 @@ class Game:
 
 def main():
 	# g = Game(recommend=True)
-	g = Game(3, 4, 0, 4, 2, 2, 2.0, True, 'AI-AI', recommend=True)
+
+	n = 3
+	b = 4
+	pb = 0
+	s = 3
+	d1 = 2
+	d2 = 2
+	t = 5
+	a = True
+	play_mode = 'AI-AI'
+
+	g = Game(n, b, pb, s, d1, d2, t, a, 'AI-AI', recommend=True)
 	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
+
+	# Open Game Trace File
+	f = open("gameTrace-4435.txt", "w")
+	f.write("n=" + str(n) + " b=" + str(b) + " s=" + str(s) + " t=" + str(t))
+	f.write("\n\nPlayer 1: " + " d=" + str(d1))
+	f.write("\nPlayer 2: " + " d=" + str(d2))
+
+	f.close
 
 if __name__ == "__main__":
 	main()
