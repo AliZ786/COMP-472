@@ -67,30 +67,58 @@ class Game:
 
 	def is_end(self):
 		# Vertical win
-		for i in range(0, self.size):
-			if (self.current_state[0][i] != '.' and
-				self.current_state[0][i] == self.current_state[1][i] and
-				self.current_state[1][i] == self.current_state[2][i]):
-				return self.current_state[0][i]
+		for i in range(self.size):
+			lineCount = 0
+			for j in range(self.size-1):
+				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
+					or self.current_state[j][i] != self.current_state[j+1][i]):
+					lineCount = 0
+				else:
+					lineCount += 1
+
+				if(lineCount == self.s-1):
+					return self.current_state[j][i]
 		
 		# Horizontal win
-		for i in range(0, self.size):
-			if (self.current_state[i] == ['X', 'X', 'X']):
-				return 'X'
-			elif (self.current_state[i] == ['O', 'O', 'O']):
-				return 'O'
+		for i in range(self.size):
+			lineCount = 0
+			for j in range(self.size-1):
+				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
+					or self.current_state[j][i] != self.current_state[j][i+1]):
+					lineCount = 0
+				else:
+					lineCount += 1
+
+				if(lineCount == self.s-1):
+					return self.current_state[j][i]
 		
 		# Main diagonal win
-		if (self.current_state[0][0] != '.' and
-			self.current_state[0][0] == self.current_state[1][1] and
-			self.current_state[0][0] == self.current_state[2][2]):
-			return self.current_state[0][0]
+		for i in range((self.size + 1) - self.s):
+			lineCount = 0
+			for j in range(self.size - 1 - j):
+				if(self.current_state[i][i+j] == "#" or self.current_state[i][i+j] == "."
+					or self.current_state[i][i+j] != self.current_state[i][i+j+1]):
+					lineCount = 0
+				else:
+					lineCount += 1
+
+				if(lineCount == self.s-1):
+					return self.current_state[i][i + j]
 		
 		# Second diagonal win
-		if (self.current_state[0][2] != '.' and
-			self.current_state[0][2] == self.current_state[1][1] and
-			self.current_state[0][2] == self.current_state[2][0]):
-			return self.current_state[0][2]
+		for i in range((self.size + 1) - self.s):
+			lineCount = 0
+			for j in range(self.size - 1 - j):
+				if(self.current_state[i][self.size - 1 - i - j] == "#" or self.current_state[i][self.size - 1 - i - j] == "."
+					or self.current_state[i][self.size - 1 - i - j] != self.current_state[i][self.size - 1 - (i + 1) - j]):
+					lineCount = 0
+				else:
+					lineCount += 1
+
+				if(lineCount == self.s-1):
+					return self.current_state[i][self.size - 1 - i - j]
+
+		# Something (random diagonals)
 		
 		# Is whole board full?
 		for i in range(0, self.size):
@@ -310,4 +338,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
