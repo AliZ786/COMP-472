@@ -42,9 +42,10 @@ class Game:
 		self.recommend = recommend
 		
 	def initialize_game(self):
-		self.current_state = [['.','.','.'],
-							  ['.','.','.'],
-							  ['.','.','.']]
+		for y in range(0, self.size):
+			for x in range(0, self.size):
+				self.current_state[x][y] = '.'			
+
 		# Player X always plays first
 		self.player_turn = 'X'
 
