@@ -297,8 +297,10 @@ def main():
 	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
 
+	gametrace_filename = "gameTrace-" + str(n)  + str(b) + str(s) + str(t) + ".txt"
+
 	# Open Game Trace File
-	f = open("gameTrace-4435.txt", "w")
+	f = open(gametrace_filename, "w")
 	f.write("n=" + str(n) + " b=" + str(b) + " s=" + str(s) + " t=" + str(t))
 	f.write("\n\nPlayer 1: " + " d=" + str(d1))
 	f.write("\nPlayer 2: " + " d=" + str(d2))
