@@ -38,13 +38,21 @@ class Game:
 		self.t = t
 		self.a = a
 		self.play_mode = p_mode
+		self.current_state = []
 		self.initialize_game()
 		self.recommend = recommend
 		
 	def initialize_game(self):
-		for y in range(0, self.size):
-			for x in range(0, self.size):
-				self.current_state[x][y] = '.'			
+		for y in range(self.size):
+			arr = []
+			for x in range(self.size):
+				# put blocs
+				for bloc in self.pos_bloc:
+					if bloc == (y, x):
+						arr.append('#')
+					else:
+						arr.append(".")
+			self.current_state.append(arr)
 
 		# Player X always plays first
 		self.player_turn = 'X'
@@ -247,7 +255,7 @@ class Game:
 							beta = value
 		return (value, x, y)
 
-	def play(self,algo=None,player_x=None,player_o=None):
+	def play(self, algo=None,player_x=None,player_o=None):
 		if algo == None:
 			algo = self.ALPHABETA
 		if player_x == None:
@@ -322,7 +330,7 @@ def main():
 	a = True
 	play_mode = 'AI-AI'
 
-	g = Game(n, b, pb, s, d1, d2, t, a, 'AI-AI', recommend=True)
+	g = Game(3, 3, [1,2], 4, 2, 2, 5, True, 'AI-AI', recommend=True)
 	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
 
@@ -333,6 +341,8 @@ def main():
 	f.write("n=" + str(n) + " b=" + str(b) + " s=" + str(s) + " t=" + str(t))
 	f.write("\n\nPlayer 1: " + " d=" + str(d1))
 	f.write("\nPlayer 2: " + " d=" + str(d2))
+	
+	# f.write(str(g.draw_board()))
 
 	f.close
 
