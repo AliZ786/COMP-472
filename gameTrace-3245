@@ -1,0 +1,55 @@
+n=3 b=2 s=4 t=5
+blocs=[[0, 0], [1, 2]]
+
+Player 1: AI d=2 a=False 
+Player 2: HUMAN d=2 a=False 
+
+...
+...
+...
+
+
+X..
+...
+...
+
+
+X..
+...
+.O.
+
+
+X..
+X..
+.O.
+
+
+X..
+X.O
+.O.
+
+
+X..
+X.O
+XO.
+
+
+X..
+XOO
+XO.
+
+
+XX.
+XOO
+XO.
+
+
+XX.
+XOO
+XOO
+
+
+XXX
+XOO
+XOO
+
