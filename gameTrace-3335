@@ -1,0 +1,51 @@
+n=3 b=3 s=3 t=5
+blocs=[(0, 0), (1, 1), (1, 2)]
+
+Player 1: AI d=2 a=False 
+Player 2: HUMAN d=2 a=False 
+
+#..
+...
+...
+
+
+#..
+X..
+...
+
+
+#..
+X..
+.O.
+
+
+#..
+XX.
+.O.
+
+
+#..
+XXO
+.O.
+
+
+#..
+XXO
+XO.
+
+
+#.O
+XXO
+XO.
+
+
+#XO
+XXO
+XO.
+
+
+#XO
+XXO
+XOO
+
+It's a tie!

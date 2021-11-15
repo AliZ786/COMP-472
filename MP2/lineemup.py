@@ -28,6 +28,7 @@ class Game:
 		self.current_state = []
 		self.initialize_game()
 		self.recommend = recommend
+
 		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}.txt', "w")
 		self.f.write(F'n={self.n} b={self.b} s={self.s} t={self.t}\n')
 		self.f.write(F'blocs={self.pb}\n\n')
@@ -57,7 +58,7 @@ class Game:
 			print()
 			self.f.write("\n")
 		print()
-		self.f.write("\n")
+		self.f.write("\n")		
 
 	def is_valid(self, px, py):
 		if px < 0 or px > self.n or py < 0 or py > self.n:
@@ -381,7 +382,8 @@ def main():
 	d2 = 2
 	t = 5
 
-	g = Game(3, 3, [(1,1), (1,1)], 3, 2, 2, 5, recommend=True)
+
+	g = Game(3, 3, [(0,0), (1,1), (1,2)], 3, 2, 2, 5, recommend=True)
 	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
 
