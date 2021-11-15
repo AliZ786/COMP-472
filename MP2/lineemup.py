@@ -7,7 +7,7 @@ class Game:
 	ALPHABETA = 1
 	HUMAN = 2
 	AI = 3
-	
+
 
 	def __init__(self, recommend = True):
 		self.initialize_game()
@@ -186,7 +186,7 @@ class Game:
 			self.player_turn = 'X'
 		return self.player_turn
 
-	def minimax(self, max=False):
+	def minimax(self, depth, max=False):
 		# Minimizing for 'X' and maximizing for 'O'
 		# Possible values are:
 		# -1 - win for 'X'
@@ -205,19 +205,27 @@ class Game:
 			return (1, x, y)
 		elif result == '.':
 			return (0, x, y)
-		for i in range(0, 3):
-			for j in range(0, 3):
+		for i in range(0, self.n):
+			for j in range(0, self.n):
+				if depth == 0:
+					return (value, x, y)
 				if self.current_state[i][j] == '.':
 					if max:
 						self.current_state[i][j] = 'O'
-						(v, _, _) = self.minimax(max=False)
+						if depth == self.d2:
+							x = i
+							y = j
+						(v, _, _) = self.minimax(depth = depth - 1, max=False)
 						if v > value:
 							value = v
 							x = i
 							y = j
 					else:
 						self.current_state[i][j] = 'X'
-						(v, _, _) = self.minimax(max=True)
+						if depth == self.d1:
+							x = i
+							y = j	
+						(v, _, _) = self.minimax(depth = depth - 1, max=True)
 						if v < value:
 							value = v
 							x = i
@@ -225,7 +233,7 @@ class Game:
 					self.current_state[i][j] = '.'
 		return (value, x, y)
 
-	def alphabeta(self, alpha=-2, beta=2, max=False):
+	def alphabeta(self, alpha=-2, beta=2, depth=0, max=False):
 		# Minimizing for 'X' and maximizing for 'O'
 		# Possible values are:
 		# -1 - win for 'X'
@@ -244,19 +252,27 @@ class Game:
 			return (1, x, y)
 		elif result == '.':
 			return (0, x, y)
-		for i in range(0, 3):
-			for j in range(0, 3):
+		for i in range(0, self.n):
+			for j in range(0, self.n):
+				if depth == 0:
+					return (value, x, y)
 				if self.current_state[i][j] == '.':
 					if max:
 						self.current_state[i][j] = 'O'
-						(v, _, _) = self.alphabeta(alpha, beta, max=False)
+						if depth == self.d2:
+							x = i
+							y = j
+						(v, _, _) = self.alphabeta(alpha, beta, depth = depth - 1, max=False)
 						if v > value:
 							value = v
 							x = i
 							y = j
 					else:
 						self.current_state[i][j] = 'X'
-						(v, _, _) = self.alphabeta(alpha, beta, max=True)
+						if depth == self.d1:
+							x = i
+							y = j
+						(v, _, _) = self.alphabeta(alpha, beta, depth = depth - 1, max=True)
 						if v < value:
 							value = v
 							x = i
@@ -323,14 +339,14 @@ class Game:
 			start = time.time()
 			if algo == self.MINIMAX:
 				if self.player_turn == 'X':
-					(_, x, y) = self.minimax(max=False)
+					(_, x, y) = self.minimax(depth = self.d1, max=False)
 				else:
-					(_, x, y) = self.minimax(max=True)
+					(_, x, y) = self.minimax(depth = self.d2, max=True)
 			else: # algo == self.ALPHABETA
 				if self.player_turn == 'X':
-					(m, x, y) = self.alphabeta(max=False)
+					(m, x, y) = self.alphabeta(depth = self.d1, max=False)
 				else:
-					(m, x, y) = self.alphabeta(max=True)
+					(m, x, y) = self.alphabeta(depth = self.d2, max=True)
 			end = time.time()
 			elapsed_t = end - start
 			if (elapsed_t > self.t):
@@ -375,10 +391,9 @@ class Game:
 
 def main():
 	# g = Game(recommend=True)
-
-	n = 3 #crashes at n > 3
-	b = 3
-	pb = [(0, 0), (1, 1)]
+	n = 4
+	b = 2
+	pb = [[0, 0], [1, 2]]
 	s = 3
 	d1 = 2
 	d2 = 2
@@ -386,8 +401,8 @@ def main():
 
 
 	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
-	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
-	#g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
+	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
+	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.HUMAN)
 
 
 if __name__ == "__main__":
