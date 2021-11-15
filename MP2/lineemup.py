@@ -95,28 +95,28 @@ class Game:
 		# Main diagonal win
 		for i in range((self.n + 1) - self.s):
 			lineCount = 0
-			for j in range(self.n - 1 - j):
-				if(self.current_state[i][i+j] == "#" or self.current_state[i][i+j] == "."
-					or self.current_state[i][i+j] != self.current_state[i][i+j+1]):
+			for j in range(self.n - 1 - i):
+				if(self.current_state[j][j+i] == "#" or self.current_state[j][j+i] == "."
+					or self.current_state[j][j+i] != self.current_state[j+1][j+i+1]):
 					lineCount = 0
 				else:
 					lineCount += 1
 
 				if(lineCount == self.s-1):
-					return self.current_state[i][i + j]
+					return self.current_state[j][j + i]
 		
 		# Second diagonal win
 		for i in range((self.n + 1) - self.s):
 			lineCount = 0
-			for j in range(self.n - 1 - j):
-				if(self.current_state[i][self.n - 1 - i - j] == "#" or self.current_state[i][self.n - 1 - i - j] == "."
-					or self.current_state[i][self.n - 1 - i - j] != self.current_state[i][self.n - 1 - (i + 1) - j]):
+			for j in range(self.n - 1 - i):
+				if(self.current_state[j][self.n - 1 - j - i] == "#" or self.current_state[j][self.n - 1 - j- i] == "."
+					or self.current_state[j][self.n - 1 - j - i] != self.current_state[j+1][self.n - 1 - (j + 1) - i]):
 					lineCount = 0
-				else:
+				else: 
 					lineCount += 1
 
 				if(lineCount == self.s-1):
-					return self.current_state[i][self.n - 1 - i - j]
+					return self.current_state[j][self.n - 1 - j - i]
 
 		# Something (random diagonals)
 		
@@ -372,7 +372,7 @@ def main():
 	n = 3
 	b = 2
 	pb = [[0, 0], [1, 2]]
-	s = 4
+	s = 3
 	d1 = 2
 	d2 = 2
 	t = 5
