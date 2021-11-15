@@ -8,6 +8,17 @@ class Game:
 	HUMAN = 2
 	AI = 3
 
+	# Required attributes
+	size = 0
+	num_bloc = 0
+	pos_bloc = 0
+	s = 0
+	d1 = 0
+	d2 = 0
+	t = 0
+	a = False
+	play_mode = 'AI-AI'
+	
 	# Number of white and black pieces on the board
 	num_X = 0
 	num_O = 0
@@ -17,29 +28,27 @@ class Game:
 		self.recommend = recommend
 
 	# Parametrized constructor
-	def __init__(self, n, b, pb, s, d1, d2, t, recommend = True):
-		self.n = n
-		self.b = b
-		self.pb = pb
+	def __init__(self, n, b, pb, s, d1, d2, t, a, p_mode, recommend = True):
+		self.size = n
+		self.num_bloc = b
+		self.pos_bloc = pb
 		self.s = s
 		self.d1 = d1
 		self.d2 = d2
 		self.t = t
+		self.a = a
+		self.play_mode = p_mode
 		self.current_state = []
 		self.initialize_game()
 		self.recommend = recommend
-		# Open Game Trace File
-		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}', "w")
-		self.f.write(F'n={self.n} b={self.b} s={self.s} t={self.t}\n')
-		self.f.write(F'blocs={self.pb}\n')
 		
 	def initialize_game(self):
-		for y in range(self.n):
+		for y in range(self.size):
 			arr = []
-			for x in range(self.n):
+			for x in range(self.size):
 				# put blocs
-				for bloc in self.pb:
-					if bloc == (y, x):
+				for bloc in self.pos_bloc:
+					if (bloc) == (y, x):
 						arr.append('#')
 					else:
 						arr.append(".")
@@ -50,18 +59,14 @@ class Game:
 
 	def draw_board(self):
 		print()
-		self.f.write("\n")
-		for y in range(0, self.n):
-			for x in range(0, self.n):
+		for y in range(0, self.size):
+			for x in range(0, self.size):
 				print(F'{self.current_state[x][y]}', end="")
-				self.f.write(F'{self.current_state[x][y]}')
 			print()
-			self.f.write("\n")
 		print()
-		self.f.write("\n")
 		
 	def is_valid(self, px, py):
-		if px < 0 or px > self.n or py < 0 or py > self.n:
+		if px < 0 or px > self.size or py < 0 or py > self.size:
 			return False
 		elif self.current_state[px][py] != '.':
 			return False
@@ -70,9 +75,9 @@ class Game:
 
 	def is_end(self):
 		# Vertical win
-		for i in range(self.n):
+		for i in range(self.size):
 			lineCount = 0
-			for j in range(self.n-1):
+			for j in range(self.size-1):
 				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
 					or self.current_state[j][i] != self.current_state[j+1][i]):
 					lineCount = 0
@@ -83,9 +88,9 @@ class Game:
 					return self.current_state[j][i]
 		
 		# Horizontal win
-		for i in range(self.n):
+		for i in range(self.size):
 			lineCount = 0
-			for j in range(self.n-1):
+			for j in range(self.size-1):
 				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
 					or self.current_state[j][i] != self.current_state[j][i+1]):
 					lineCount = 0
@@ -96,9 +101,9 @@ class Game:
 					return self.current_state[j][i]
 		
 		# Main diagonal win
-		for i in range((self.n + 1) - self.s):
+		for i in range((self.size + 1) - self.s):
 			lineCount = 0
-			for j in range(self.n - 1 - j):
+			for j in range(self.size - 1 - j):
 				if(self.current_state[i][i+j] == "#" or self.current_state[i][i+j] == "."
 					or self.current_state[i][i+j] != self.current_state[i][i+j+1]):
 					lineCount = 0
@@ -109,23 +114,23 @@ class Game:
 					return self.current_state[i][i + j]
 		
 		# Second diagonal win
-		for i in range((self.n + 1) - self.s):
+		for i in range((self.size + 1) - self.s):
 			lineCount = 0
-			for j in range(self.n - 1 - j):
-				if(self.current_state[i][self.n - 1 - i - j] == "#" or self.current_state[i][self.n - 1 - i - j] == "."
-					or self.current_state[i][self.n - 1 - i - j] != self.current_state[i][self.n - 1 - (i + 1) - j]):
+			for j in range(self.size - 1 - j):
+				if(self.current_state[i][self.size - 1 - i - j] == "#" or self.current_state[i][self.size - 1 - i - j] == "."
+					or self.current_state[i][self.size - 1 - i - j] != self.current_state[i][self.size - 1 - (i + 1) - j]):
 					lineCount = 0
 				else:
 					lineCount += 1
 
 				if(lineCount == self.s-1):
-					return self.current_state[i][self.n - 1 - i - j]
+					return self.current_state[i][self.size - 1 - i - j]
 
 		# Something (random diagonals)
 		
 		# Is whole board full?
-		for i in range(0, self.n):
-			for j in range(0, self.n):
+		for i in range(0, self.size):
+			for j in range(0, self.size):
 				# There's an empty field, we continue the game
 				if (self.current_state[i][j] == '.'):
 					return None
@@ -289,8 +294,8 @@ class Game:
 	
 	# Determining number of white pieces
 	def num_white(self):
-		for i in range(0, self.n):
-			for j in range(0, self.n):
+		for i in range(0, self.size):
+			for j in range(0, self.size):
 				if (self.current_state[i][j] == 'X'):
 					num_X = num_X + 1
 				else:
@@ -299,8 +304,8 @@ class Game:
 
 	# Determining number of black pieces
 	def num_black(self):
-		for i in range(0, self.n):
-			for j in range(0, self.n):
+		for i in range(0, self.size):
+			for j in range(0, self.size):
 				if (self.current_state[i][j] == 'O'):
 					num_O = num_O + 1
 				else:
@@ -316,18 +321,30 @@ def main():
 	# g = Game(recommend=True)
 
 	n = 4
-	b = 2
-	pb = [[0, 0], [1, 2]]
-	s = 4
+	b = 4
+	pb = 0
+	s = 3
 	d1 = 2
 	d2 = 2
 	t = 5
+	a = True
+	play_mode = 'AI-AI'
 
-	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
-	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
+	g = Game(3, 3, [(0,0), (1,1), (1,2)], 3, 2, 2, 5, True, 'AI-AI', recommend=True)
+	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
+
+	gametrace_filename = "gameTrace-" + str(n)  + str(b) + str(s) + str(t) + ".txt"
+
+	# Open Game Trace File
+	f = open(gametrace_filename, "w")
+	f.write("n=" + str(n) + " b=" + str(b) + " s=" + str(s) + " t=" + str(t))
+	f.write("\n\nPlayer 1: " + " d=" + str(d1))
+	f.write("\nPlayer 2: " + " d=" + str(d2))
 	
 	# f.write(str(g.draw_board()))
+
+	f.close
 
 if __name__ == "__main__":
 	main()
