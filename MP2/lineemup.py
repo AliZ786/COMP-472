@@ -137,10 +137,13 @@ class Game:
 		if self.result != None:
 			if self.result == 'X':
 				print('The winner is X!')
+				self.f.write('The winner is X!')
 			elif self.result == 'O':
 				print('The winner is O!')
+				self.f.write('The winner is O!')
 			elif self.result == '.':
 				print("It's a tie!")
+				self.f.write("It's a tie!")
 			self.initialize_game()
 		return self.result
 
@@ -250,6 +253,27 @@ class Game:
 		return (value, x, y)
 
 	def play(self, algo=None,player_x=None,player_o=None):
+		# Write parameters of each player to the file
+		if player_x == self.AI:
+			self.f.write(F'Player 1: AI d={self.d1} ')
+		else:
+			self.f.write(F'Player 1: HUMAN d={self.d1} ')
+		if algo == self.ALPHABETA:
+			self.f.write(F'a=True \n')
+		else:
+			self.f.write(F'a=False \n')
+
+		if player_o == self.AI:
+			self.f.write(F'Player 2: AI d={self.d2} ')
+		else:
+			self.f.write(F'Player 2: HUMAN d={self.d2} ')
+		if algo == self.ALPHABETA:
+			self.f.write(F'a=True ')
+		else:
+			self.f.write(F'a=False ')
+
+		self.f.write('\n')
+
 		if algo == None:
 			algo = self.ALPHABETA
 		if player_x == None:
