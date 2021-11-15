@@ -28,7 +28,8 @@ class Game:
 		self.current_state = []
 		self.initialize_game()
 		self.recommend = recommend
-		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}', "w")
+
+		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}.txt', "w")
 		self.f.write(F'n={self.n} b={self.b} s={self.s} t={self.t}\n')
 		self.f.write(F'blocs={self.pb}\n\n')
 		
@@ -57,8 +58,8 @@ class Game:
 			print()
 			self.f.write("\n")
 		print()
-		self.f.write("\n")
-		
+		self.f.write("\n")		
+
 	def is_valid(self, px, py):
 		if px < 0 or px > self.n or py < 0 or py > self.n:
 			return False
@@ -148,12 +149,29 @@ class Game:
 		return self.result
 
 	def input_move(self):
+		# Dictionary that maps all values of x to an integer value to allow for validation
+		dict_x_coord = {
+						'A': 0,
+						'B': 1,
+						'C': 2,
+						'D': 3,
+						'E': 4,
+						'F': 5,
+						'G': 6,
+						'H': 7,
+						'I': 8,
+						'J': 9
+		}
+
 		while True:
 			print(F'Player {self.player_turn}, enter your move:')
-			px = int(input('enter the x coordinate: '))
+			px = input('enter the x coordinate: ')
 			py = int(input('enter the y coordinate: '))
-			if self.is_valid(px, py):
-				return (px,py)
+
+			mapped_x = dict_x_coord[px]
+
+			if self.is_valid(mapped_x, py):
+				return (mapped_x,py)
 			else:
 				print('The move is not valid! Try again.')
 
@@ -253,6 +271,20 @@ class Game:
 		return (value, x, y)
 
 	def play(self, algo=None,player_x=None,player_o=None):
+		# Dictionary that maps all coordiante values of x to its corresponding string for display purposes
+		dict_x_coord = {
+						0: 'A',
+						1: 'B',
+						2: 'C',
+						3: 'D',
+						4: 'E',
+						5: 'F',
+						6: 'G',
+						7: 'H',
+						8: 'I',
+						9: 'J'
+		}
+
 		# Write parameters of each player to the file
 		if player_x == self.AI:
 			self.f.write(F'Player 1: AI d={self.d1} ')
@@ -307,6 +339,10 @@ class Game:
 			if (self.player_turn == 'X' and player_x == self.AI) or (self.player_turn == 'O' and player_o == self.AI):
 						print(F'Evaluation time: {round(end - start, 7)}s')
 						print(F'Player {self.player_turn} under AI control plays: x = {x}, y = {y}')
+
+			mapped_x = dict_x_coord[x]
+			self.f.write("Move taken: " + mapped_x + " " + str(y))
+
 			self.current_state[x][y] = self.player_turn
 			self.switch_player()
 	
@@ -345,6 +381,7 @@ def main():
 	d1 = 2
 	d2 = 2
 	t = 5
+
 
 	g = Game(3, 3, [(0,0), (1,1), (1,2)], 3, 2, 2, 5, recommend=True)
 	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
