@@ -7,17 +7,6 @@ class Game:
 	ALPHABETA = 1
 	HUMAN = 2
 	AI = 3
-
-	# Required attributes
-	size = 0
-	num_bloc = 0
-	pos_bloc = 0
-	s = 0
-	d1 = 0
-	d2 = 0
-	t = 0
-	a = False
-	play_mode = 'AI-AI'
 	
 	# Number of white and black pieces on the board
 	num_X = 0
@@ -28,26 +17,27 @@ class Game:
 		self.recommend = recommend
 
 	# Parametrized constructor
-	def __init__(self, n, b, pb, s, d1, d2, t, a, p_mode, recommend = True):
-		self.size = n
-		self.num_bloc = b
-		self.pos_bloc = pb
+	def __init__(self, n, b, pb, s, d1, d2, t, recommend = True):
+		self.n = n
+		self.b = b
+		self.pb = pb
 		self.s = s
 		self.d1 = d1
 		self.d2 = d2
 		self.t = t
-		self.a = a
-		self.play_mode = p_mode
 		self.current_state = []
 		self.initialize_game()
 		self.recommend = recommend
+		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}.txt', "w")
+		self.f.write(F'n={self.n} b={self.b} s={self.s} t={self.t}\n')
+		self.f.write(F'blocs={self.pb}\n\n')
 		
 	def initialize_game(self):
-		for y in range(self.size):
+		for y in range(self.n):
 			arr = []
-			for x in range(self.size):
+			for x in range(self.n):
 				# put blocs
-				for bloc in self.pos_bloc:
+				for bloc in self.pb:
 					if (bloc) == (y, x):
 						arr.append('#')
 					else:
@@ -59,14 +49,18 @@ class Game:
 
 	def draw_board(self):
 		print()
-		for y in range(0, self.size):
-			for x in range(0, self.size):
+		self.f.write("\n")
+		for y in range(0, self.n):
+			for x in range(0, self.n):
 				print(F'{self.current_state[x][y]}', end="")
+				self.f.write(F'{self.current_state[x][y]}')
 			print()
+			self.f.write("\n")
 		print()
-		
+		self.f.write("\n")
+
 	def is_valid(self, px, py):
-		if px < 0 or px > self.size or py < 0 or py > self.size:
+		if px < 0 or px > self.n or py < 0 or py > self.n:
 			return False
 		elif self.current_state[px][py] != '.':
 			return False
@@ -75,9 +69,9 @@ class Game:
 
 	def is_end(self):
 		# Vertical win
-		for i in range(self.size):
+		for i in range(self.n):
 			lineCount = 0
-			for j in range(self.size-1):
+			for j in range(self.n-1):
 				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
 					or self.current_state[j][i] != self.current_state[j+1][i]):
 					lineCount = 0
@@ -88,9 +82,9 @@ class Game:
 					return self.current_state[j][i]
 		
 		# Horizontal win
-		for i in range(self.size):
+		for i in range(self.n):
 			lineCount = 0
-			for j in range(self.size-1):
+			for j in range(self.n-1):
 				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
 					or self.current_state[j][i] != self.current_state[j][i+1]):
 					lineCount = 0
@@ -101,9 +95,9 @@ class Game:
 					return self.current_state[j][i]
 		
 		# Main diagonal win
-		for i in range((self.size + 1) - self.s):
+		for i in range((self.n + 1) - self.s):
 			lineCount = 0
-			for j in range(self.size - 1 - j):
+			for j in range(self.n - 1 - j):
 				if(self.current_state[i][i+j] == "#" or self.current_state[i][i+j] == "."
 					or self.current_state[i][i+j] != self.current_state[i][i+j+1]):
 					lineCount = 0
@@ -114,23 +108,23 @@ class Game:
 					return self.current_state[i][i + j]
 		
 		# Second diagonal win
-		for i in range((self.size + 1) - self.s):
+		for i in range((self.n + 1) - self.s):
 			lineCount = 0
-			for j in range(self.size - 1 - j):
-				if(self.current_state[i][self.size - 1 - i - j] == "#" or self.current_state[i][self.size - 1 - i - j] == "."
-					or self.current_state[i][self.size - 1 - i - j] != self.current_state[i][self.size - 1 - (i + 1) - j]):
+			for j in range(self.n - 1 - j):
+				if(self.current_state[i][self.n - 1 - i - j] == "#" or self.current_state[i][self.n - 1 - i - j] == "."
+					or self.current_state[i][self.n - 1 - i - j] != self.current_state[i][self.n - 1 - (i + 1) - j]):
 					lineCount = 0
 				else:
 					lineCount += 1
 
 				if(lineCount == self.s-1):
-					return self.current_state[i][self.size - 1 - i - j]
+					return self.current_state[i][self.n - 1 - i - j]
 
 		# Something (random diagonals)
 		
 		# Is whole board full?
-		for i in range(0, self.size):
-			for j in range(0, self.size):
+		for i in range(0, self.n):
+			for j in range(0, self.n):
 				# There's an empty field, we continue the game
 				if (self.current_state[i][j] == '.'):
 					return None
@@ -143,20 +137,40 @@ class Game:
 		if self.result != None:
 			if self.result == 'X':
 				print('The winner is X!')
+				self.f.write('The winner is X!')
 			elif self.result == 'O':
 				print('The winner is O!')
+				self.f.write('The winner is O!')
 			elif self.result == '.':
 				print("It's a tie!")
+				self.f.write("It's a tie!")
 			self.initialize_game()
 		return self.result
 
 	def input_move(self):
+		# Dictionary that maps all values of x to an integer value to allow for validation
+		dict_x_coord = {
+						'A': 0,
+						'B': 1,
+						'C': 2,
+						'D': 3,
+						'E': 4,
+						'F': 5,
+						'G': 6,
+						'H': 7,
+						'I': 8,
+						'J': 9
+		}
+
 		while True:
 			print(F'Player {self.player_turn}, enter your move:')
-			px = int(input('enter the x coordinate: '))
+			px = input('enter the x coordinate: ')
 			py = int(input('enter the y coordinate: '))
-			if self.is_valid(px, py):
-				return (px,py)
+
+			mapped_x = dict_x_coord[px]
+
+			if self.is_valid(mapped_x, py):
+				return (mapped_x,py)
 			else:
 				print('The move is not valid! Try again.')
 
@@ -256,6 +270,41 @@ class Game:
 		return (value, x, y)
 
 	def play(self, algo=None,player_x=None,player_o=None):
+		# Dictionary that maps all coordiante values of x to its corresponding string for display purposes
+		dict_x_coord = {
+						0: 'A',
+						1: 'B',
+						2: 'C',
+						3: 'D',
+						4: 'E',
+						5: 'F',
+						6: 'G',
+						7: 'H',
+						8: 'I',
+						9: 'J'
+		}
+
+		# Write parameters of each player to the file
+		if player_x == self.AI:
+			self.f.write(F'Player 1: AI d={self.d1} ')
+		else:
+			self.f.write(F'Player 1: HUMAN d={self.d1} ')
+		if algo == self.ALPHABETA:
+			self.f.write(F'a=True \n')
+		else:
+			self.f.write(F'a=False \n')
+
+		if player_o == self.AI:
+			self.f.write(F'Player 2: AI d={self.d2} ')
+		else:
+			self.f.write(F'Player 2: HUMAN d={self.d2} ')
+		if algo == self.ALPHABETA:
+			self.f.write(F'a=True ')
+		else:
+			self.f.write(F'a=False ')
+
+		self.f.write('\n')
+
 		if algo == None:
 			algo = self.ALPHABETA
 		if player_x == None:
@@ -289,13 +338,17 @@ class Game:
 			if (self.player_turn == 'X' and player_x == self.AI) or (self.player_turn == 'O' and player_o == self.AI):
 						print(F'Evaluation time: {round(end - start, 7)}s')
 						print(F'Player {self.player_turn} under AI control plays: x = {x}, y = {y}')
+
+			mapped_x = dict_x_coord[x]
+			self.f.write("Move taken: " + mapped_x + " " + str(y))
+
 			self.current_state[x][y] = self.player_turn
 			self.switch_player()
 	
 	# Determining number of white pieces
 	def num_white(self):
-		for i in range(0, self.size):
-			for j in range(0, self.size):
+		for i in range(0, self.n):
+			for j in range(0, self.n):
 				if (self.current_state[i][j] == 'X'):
 					num_X = num_X + 1
 				else:
@@ -304,8 +357,8 @@ class Game:
 
 	# Determining number of black pieces
 	def num_black(self):
-		for i in range(0, self.size):
-			for j in range(0, self.size):
+		for i in range(0, self.n):
+			for j in range(0, self.n):
 				if (self.current_state[i][j] == 'O'):
 					num_O = num_O + 1
 				else:
@@ -320,31 +373,18 @@ class Game:
 def main():
 	# g = Game(recommend=True)
 
-	n = 4
-	b = 4
-	pb = 0
-	s = 3
+	n = 3
+	b = 2
+	pb = [[0, 0], [1, 2]]
+	s = 4
 	d1 = 2
 	d2 = 2
 	t = 5
-	a = True
-	play_mode = 'AI-AI'
 
-	g = Game(3, 3, [(0,0), (1,1), (1,2)], 3, 2, 2, 5, True, 'AI-AI', recommend=True)
-	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
+	g = Game(3, 3, [(1,1), (1,1)], 3, 2, 2, 5, recommend=True)
+	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
 
-	gametrace_filename = "gameTrace-" + str(n)  + str(b) + str(s) + str(t) + ".txt"
-
-	# Open Game Trace File
-	f = open(gametrace_filename, "w")
-	f.write("n=" + str(n) + " b=" + str(b) + " s=" + str(s) + " t=" + str(t))
-	f.write("\n\nPlayer 1: " + " d=" + str(d1))
-	f.write("\nPlayer 2: " + " d=" + str(d2))
-	
-	# f.write(str(g.draw_board()))
-
-	f.close
 
 if __name__ == "__main__":
 	main()
