@@ -24,6 +24,7 @@ class Game:
 		self.t = t
 		self.current_state = []
 		self.initialize_game()
+		#self.insert_blocs()
 		self.recommend = recommend
 
 		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}.txt', "w")
@@ -49,7 +50,8 @@ class Game:
 		for x in range(self.n):
 			for y in range(self.n):
 				for (bloc) in self.pb:
-					if(bloc) == (x,y):
+					if(bloc) == (x,y):						
+						#print("HELLO\tGOODNIGHT")
 						self.current_state[x][y] = "#"
 
 	def draw_board(self):
@@ -393,7 +395,7 @@ def main():
 	# g = Game(recommend=True)
 	n = 4
 	b = 2
-	pb = [[0, 0], [1, 2]]
+	pb = [(0, 0), (1, 2)]
 	s = 3
 	d1 = 2
 	d2 = 2
