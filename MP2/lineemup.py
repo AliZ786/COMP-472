@@ -7,7 +7,7 @@ class Game:
 	ALPHABETA = 1
 	HUMAN = 2
 	AI = 3
-
+	
 	# Number of white and black pieces on the board
 	num_X = 0
 	num_O = 0
@@ -28,7 +28,6 @@ class Game:
 		self.current_state = []
 		self.initialize_game()
 		self.recommend = recommend
-		# Open Game Trace File
 		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}', "w")
 		self.f.write(F'n={self.n} b={self.b} s={self.s} t={self.t}\n')
 		self.f.write(F'blocs={self.pb}\n\n')
@@ -39,7 +38,7 @@ class Game:
 			for x in range(self.n):
 				# put blocs
 				for bloc in self.pb:
-					if bloc == (y, x):
+					if (bloc) == (y, x):
 						arr.append('#')
 					else:
 						arr.append(".")
@@ -251,27 +250,6 @@ class Game:
 		return (value, x, y)
 
 	def play(self, algo=None,player_x=None,player_o=None):
-		# Write parameters of each player to the file
-		if player_x == self.AI:
-			self.f.write(F'Player 1: AI d={self.d1} ')
-		else:
-			self.f.write(F'Player 1: HUMAN d={self.d1} ')
-		if algo == self.ALPHABETA:
-			self.f.write(F'a=True \n')
-		else:
-			self.f.write(F'a=False \n')
-
-		if player_o == self.AI:
-			self.f.write(F'Player 2: AI d={self.d2} ')
-		else:
-			self.f.write(F'Player 2: HUMAN d={self.d2} ')
-		if algo == self.ALPHABETA:
-			self.f.write(F'a=True ')
-		else:
-			self.f.write(F'a=False ')
-
-		self.f.write('\n')
-
 		if algo == None:
 			algo = self.ALPHABETA
 		if player_x == None:
@@ -344,10 +322,9 @@ def main():
 	d2 = 2
 	t = 5
 
-	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
+	g = Game(3, 3, [(0,0), (1,1), (1,2)], 3, 2, 2, 5, recommend=True)
 	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
-
 
 
 if __name__ == "__main__":
