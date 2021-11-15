@@ -8,9 +8,6 @@ class Game:
 	HUMAN = 2
 	AI = 3
 	
-	# Number of white and black pieces on the board
-	num_X = 0
-	num_O = 0
 
 	def __init__(self, recommend = True):
 		self.initialize_game()
@@ -98,28 +95,28 @@ class Game:
 		# Main diagonal win
 		for i in range((self.n + 1) - self.s):
 			lineCount = 0
-			for j in range(self.n - 1 - j):
-				if(self.current_state[i][i+j] == "#" or self.current_state[i][i+j] == "."
-					or self.current_state[i][i+j] != self.current_state[i][i+j+1]):
+			for j in range(self.n - 1 - i):
+				if(self.current_state[j][j+i] == "#" or self.current_state[j][j+i] == "."
+					or self.current_state[j][j+i] != self.current_state[j+1][j+i+1]):
 					lineCount = 0
 				else:
 					lineCount += 1
 
 				if(lineCount == self.s-1):
-					return self.current_state[i][i + j]
+					return self.current_state[j][j + i]
 		
 		# Second diagonal win
 		for i in range((self.n + 1) - self.s):
 			lineCount = 0
-			for j in range(self.n - 1 - j):
-				if(self.current_state[i][self.n - 1 - i - j] == "#" or self.current_state[i][self.n - 1 - i - j] == "."
-					or self.current_state[i][self.n - 1 - i - j] != self.current_state[i][self.n - 1 - (i + 1) - j]):
+			for j in range(self.n - 1 - i):
+				if(self.current_state[j][self.n - 1 - j - i] == "#" or self.current_state[j][self.n - 1 - j- i] == "."
+					or self.current_state[j][self.n - 1 - j - i] != self.current_state[j+1][self.n - 1 - (j + 1) - i]):
 					lineCount = 0
-				else:
+				else: 
 					lineCount += 1
 
 				if(lineCount == self.s-1):
-					return self.current_state[i][self.n - 1 - i - j]
+					return self.current_state[j][self.n - 1 - j - i]
 
 		# Something (random diagonals)
 		
@@ -201,8 +198,8 @@ class Game:
 			return (1, x, y)
 		elif result == '.':
 			return (0, x, y)
-		for i in range(0, 3):
-			for j in range(0, 3):
+		for i in range(0, self.n):
+			for j in range(0, self.n):
 				if self.current_state[i][j] == '.':
 					if max:
 						self.current_state[i][j] = 'O'
@@ -240,8 +237,8 @@ class Game:
 			return (1, x, y)
 		elif result == '.':
 			return (0, x, y)
-		for i in range(0, 3):
-			for j in range(0, 3):
+		for i in range(0, self.n):
+			for j in range(0, self.n):
 				if self.current_state[i][j] == '.':
 					if max:
 						self.current_state[i][j] = 'O'
@@ -348,27 +345,25 @@ class Game:
 	
 	# Determining number of white pieces
 	def num_white(self):
-		for i in range(0, self.n):
-			for j in range(0, self.n):
-				if (self.current_state[i][j] == 'X'):
+		num_X = 0
+		for y in range(0, self.n):
+			for x in range(0, self.n):
+				if self.current_state[x][y] == 'X':
 					num_X = num_X + 1
-				else:
-					return None
-		return num_X				
+		return num_X			
 
 	# Determining number of black pieces
 	def num_black(self):
-		for i in range(0, self.n):
-			for j in range(0, self.n):
-				if (self.current_state[i][j] == 'O'):
+		num_O = 0
+		for y in range(0, self.n):
+			for x in range(0, self.n):
+				if self.current_state[x][y] == 'O':
 					num_O = num_O + 1
-				else:
-					return None
 		return num_O
 
 	# Developing e1 (simple heuristic)
 	def e1(self):
-		e = self.num_white - self.num_black
+		e = self.num_black() - self.num_white()
 		return e
 
 def main():
@@ -377,13 +372,13 @@ def main():
 	n = 3
 	b = 2
 	pb = [[0, 0], [1, 2]]
-	s = 4
+	s = 3
 	d1 = 2
 	d2 = 2
 	t = 5
 
 
-	g = Game(3, 3, [(0,0), (1,1), (1,2)], 3, 2, 2, 5, recommend=True)
+	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
 	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
 	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
 
