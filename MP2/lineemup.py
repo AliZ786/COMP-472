@@ -33,17 +33,24 @@ class Game:
 	def initialize_game(self):
 		for y in range(self.n):
 			arr = []
-			for x in range(self.n):
-				# put blocs
-				for bloc in self.pb:
+			for x in range(self.n):				
+				for (bloc) in self.pb:
 					if (bloc) == (y, x):
-						arr.append('#')
+						arr.append("#")  # put blocs(#)
 					else:
 						arr.append(".")
 			self.current_state.append(arr)
 
+		self.insert_blocs()
 		# Player X always plays first
 		self.player_turn = 'X'
+
+	def insert_blocs(self):
+		for x in range(self.n):
+			for y in range(self.n):
+				for (bloc) in self.pb:
+					if(bloc) == (x,y):
+						self.current_state[x][y] = "#"
 
 	def draw_board(self):
 		print()
@@ -198,8 +205,8 @@ class Game:
 			return (1, x, y)
 		elif result == '.':
 			return (0, x, y)
-		for i in range(0, self.n):
-			for j in range(0, self.n):
+		for i in range(0, 3):
+			for j in range(0, 3):
 				if self.current_state[i][j] == '.':
 					if max:
 						self.current_state[i][j] = 'O'
@@ -237,8 +244,8 @@ class Game:
 			return (1, x, y)
 		elif result == '.':
 			return (0, x, y)
-		for i in range(0, self.n):
-			for j in range(0, self.n):
+		for i in range(0, 3):
+			for j in range(0, 3):
 				if self.current_state[i][j] == '.':
 					if max:
 						self.current_state[i][j] = 'O'
@@ -369,9 +376,9 @@ class Game:
 def main():
 	# g = Game(recommend=True)
 
-	n = 3
-	b = 2
-	pb = [[0, 0], [1, 2]]
+	n = 3 #crashes at n > 3
+	b = 3
+	pb = [(0, 0), (1, 1)]
 	s = 3
 	d1 = 2
 	d2 = 2
@@ -379,8 +386,8 @@ def main():
 
 
 	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
-	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
-	g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
+	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
+	#g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN)
 
 
 if __name__ == "__main__":
