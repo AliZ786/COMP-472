@@ -33,17 +33,24 @@ class Game:
 	def initialize_game(self):
 		for y in range(self.n):
 			arr = []
-			for x in range(self.n):
-				# put blocs
-				for bloc in self.pb:
+			for x in range(self.n):				
+				for (bloc) in self.pb:
 					if (bloc) == (y, x):
-						arr.append('#')
+						arr.append("#")  # put blocs(#)
 					else:
 						arr.append(".")
 			self.current_state.append(arr)
 
+		self.insert_blocs()
 		# Player X always plays first
 		self.player_turn = 'X'
+
+	def insert_blocs(self):
+		for x in range(self.n):
+			for y in range(self.n):
+				for (bloc) in self.pb:
+					if(bloc) == (x,y):
+						self.current_state[x][y] = "#"
 
 	def draw_board(self):
 		print()
@@ -384,7 +391,6 @@ class Game:
 
 def main():
 	# g = Game(recommend=True)
-
 	n = 4
 	b = 2
 	pb = [[0, 0], [1, 2]]
