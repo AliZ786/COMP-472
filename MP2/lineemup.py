@@ -49,9 +49,10 @@ class Game:
 		for x in range(self.n):
 			for y in range(self.n):
 				for (bloc) in self.pb:
-					if(bloc) == (x,y):						
-						#print("HELLO\tGOODNIGHT")
+					if(bloc) == (x,y):				
 						self.current_state[x][y] = "#"
+					#else:
+					#	self.current_state[x][y] = "."
 
 	def draw_board(self):
 		print()
@@ -75,58 +76,76 @@ class Game:
 
 	def is_end(self):
 		# Vertical win
+		lineCount = 0
 		for i in range(self.n):
-			lineCount = 0
 			for j in range(self.n-1):
-				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
-					or self.current_state[j][i] != self.current_state[j+1][i]):
+				if(self.current_state[i][j] == "#" or self.current_state[i][j] == "." or self.current_state[i][j] != self.current_state[i][j+1]):
 					lineCount = 0
 				else:
 					lineCount += 1
-
 				if(lineCount == self.s-1):
-					return self.current_state[j][i]
+					return self.current_state[i][j]
 		
 		# Horizontal win
+		lineCount = 0
 		for i in range(self.n):
-			lineCount = 0
 			for j in range(self.n-1):
-				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "."
-					or self.current_state[j][i] != self.current_state[j][i+1]):
+				if(self.current_state[j][i] == "#" or self.current_state[j][i] == "." or self.current_state[j][i] != self.current_state[j][i+1]):
 					lineCount = 0
 				else:
 					lineCount += 1
-
 				if(lineCount == self.s-1):
 					return self.current_state[j][i]
 		
 		# Main diagonal win
+		lineCount = 0
 		for i in range((self.n + 1) - self.s):
-			lineCount = 0
 			for j in range(self.n - 1 - i):
-				if(self.current_state[j][j+i] == "#" or self.current_state[j][j+i] == "."
-					or self.current_state[j][j+i] != self.current_state[j+1][j+i+1]):
+				if(self.current_state[j][j+i] == "#" or self.current_state[j][j+i] == "." or self.current_state[j][j+i] != self.current_state[j+1][j+i+1]):
 					lineCount = 0
 				else:
 					lineCount += 1
-
 				if(lineCount == self.s-1):
 					return self.current_state[j][j + i]
 		
 		# Second diagonal win
+		lineCount = 0
 		for i in range((self.n + 1) - self.s):
-			lineCount = 0
 			for j in range(self.n - 1 - i):
 				if(self.current_state[j][self.n - 1 - j - i] == "#" or self.current_state[j][self.n - 1 - j- i] == "."
-					or self.current_state[j][self.n - 1 - j - i] != self.current_state[j+1][self.n - 1 - (j + 1) - i]):
+				or self.current_state[j][self.n - 1 - j - i] != self.current_state[j+1][self.n - 1 - (j + 1) - i]):
 					lineCount = 0
 				else: 
 					lineCount += 1
-
 				if(lineCount == self.s-1):
-					return self.current_state[j][self.n - 1 - j - i]
+					return self.current_state[j+1][self.n - 1 - j - i]
 
-		# Something (random diagonals)
+		# Diagonals with self.s smaller than self.n
+		# Right
+		lineCount = 0
+		if self.s < self.n:
+			for m in range(self.n - self.s):
+				for n in range(self.n - 2 - m):
+					if (self.current_state[n + m + 1][self.n - 1 - n] == "#" or self.current_state[n + m + 1][self.n - 1 - n] == "."
+						or self.current_state[n + m + 1][self.n - 1 - n] != self.current_state[n + m + 2][self.n - 1 - (n+1)]):
+						lineCount = 0
+					else: 
+						lineCount += 1
+					if lineCount == self.s-1:
+						return self.current_state[n + m + 1][self.n - 1 - n]
+		
+		# Left
+		lineCount = 0
+		if self.s < self.n:
+			for m in range(self.n - self.s):
+				for n in range(self.n - 2 - m):
+					if (self.current_state[n + m + 1][n] == "#" or self.current_state[n + m + 1][n] == "."
+					or self.current_state[n + m + 1][n] != self.current_state[n + m + 2][n + 1]):
+						lineCount = 0
+					else: 
+						lineCount += 1
+					if lineCount == self.s-1:
+						return self.current_state[n + m + 1][n]
 		
 		# Is whole board full?
 		for i in range(0, self.n):
@@ -357,10 +376,14 @@ class Game:
 			if (self.player_turn == 'X' and player_x == self.HUMAN) or (self.player_turn == 'O' and player_o == self.HUMAN):
 					if self.recommend:
 						print(F'Evaluation time: {round(end - start, 7)}s')
+						self.f.write("Evaluation time: " + str(round(end - start, 7)))
+						self.f.write("\n")
 						print(F'Recommended move: x = {x}, y = {y}')
 					(x,y) = self.input_move()
 			if (self.player_turn == 'X' and player_x == self.AI) or (self.player_turn == 'O' and player_o == self.AI):
 						print(F'Evaluation time: {round(end - start, 7)}s')
+						self.f.write("Evaluation time: " + str(round(end - start, 7)))
+						self.f.write("\n")
 						print(F'Player {self.player_turn} under AI control plays: x = {x}, y = {y}')
 
 			mapped_x = dict_x_coord[x]
@@ -402,7 +425,7 @@ class Game:
 
 def main():
 	# g = Game(recommend=True)
-	n = 3
+	n = 4
 	b = 2
 	pb = [(0, 0), (1, 2)]
 	s = 3
@@ -412,8 +435,8 @@ def main():
 
 
 	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
-	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
-	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.HUMAN)
+	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
+	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.HUMAN)
 
 
 if __name__ == "__main__":
