@@ -38,21 +38,30 @@ class Game:
 					if (bloc) == (y, x):
 						arr.append("#")  # put blocs(#)
 					else:
-						arr.append(".")
+						arr.append(",")
 			self.current_state.append(arr)
 
 		self.insert_blocs()
 		# Player X always plays first
 		self.player_turn = 'X'
 
+	def double_check(self):
+		for i in range(self.n):
+			for j in range(self.n):
+				for (bloc) in self.pb:
+					if(bloc) == (i,j):
+						#print((i,j))										
+						self.current_state[i][j] = "#"
+
 	def insert_blocs(self):
 		for x in range(self.n):
 			for y in range(self.n):
 				for (bloc) in self.pb:
-					if(bloc) == (x,y):				
-						self.current_state[x][y] = "#"
-					#else:
-					#	self.current_state[x][y] = "."
+					if(bloc) != (x,y):				
+						self.current_state[x][y] = "."
+
+		self.double_check()
+						
 
 	def draw_board(self):
 		print()
@@ -284,8 +293,7 @@ class Game:
 							y = j
 						(v, _, _) = self.alphabeta(alpha, beta, depth = depth - 1, max=False)
 						if v > value:
-							#value = v
-							value = self.e2()
+							value = v
 							x = i
 							y = j
 					else:
@@ -295,8 +303,7 @@ class Game:
 							y = j
 						(v, _, _) = self.alphabeta(alpha, beta, depth = depth - 1, max=True)
 						if v < value:
-							#value = v
-							value = self.e2()
+							value = v
 							x = i
 							y = j
 					self.current_state[i][j] = '.'
@@ -425,7 +432,7 @@ class Game:
 
 def main():
 	# g = Game(recommend=True)
-	n = 4
+	n = 6
 	b = 2
 	pb = [(0, 0), (1, 2)]
 	s = 3
