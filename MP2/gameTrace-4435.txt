@@ -1,0 +1,75 @@
+n=4 b=4 s=3 t=5
+blocs=[(0, 0), (0, 3), (3, 3), (3, 0)]
+
+Player 1: AI d=6 a=False e2 (defensive)
+Player 2: HUMAN d=6 a=False e2 (defensive)
+
+#..#
+....
+....
+#..#
+
+Evaluation time: 12.1968408
+Move taken: D 2
+#..#
+....
+...X
+#..#
+
+Evaluation time: 6.3729084
+Move taken: A 2
+#..#
+....
+O..X
+#..#
+
+Evaluation time: 2.8852625
+Move taken: D 1
+#..#
+...X
+O..X
+#..#
+
+Evaluation time: 1.1335466
+Move taken: B 2
+#..#
+...X
+OO.X
+#..#
+
+Evaluation time: 0.2812932
+Move taken: C 3
+#..#
+...X
+OO.X
+#.X#
+
+Evaluation time: 0.0867686
+Move taken: C 2
+#..#
+...X
+OOOX
+#.X#
+
+Evaluation time: 0.0189474
+Move taken: C 1
+#..#
+..XX
+OOOX
+#.X#
+
+Evaluation time: 0.001996
+Move taken: B 3
+#..#
+..XX
+OOOX
+#OX#
+
+Evaluation time: 0.0
+Move taken: C 0
+#.X#
+..XX
+OOOX
+#OX#
+
+The winner is X!
