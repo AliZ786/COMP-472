@@ -1,75 +1,68 @@
 n=4 b=4 s=3 t=5
 blocs=[(0, 0), (0, 3), (3, 3), (3, 0)]
 
-Player 1: AI d=6 a=False e2 (defensive)
-Player 2: HUMAN d=6 a=False e2 (defensive)
+Player 1: AI d=6 a=True e2 (defensive)
+Player 2: HUMAN d=6 a=True e2 (defensive)
 
 #..#
 ....
 ....
 #..#
 
-Evaluation time: 12.1968408
+Evaluation time: 0.1695855
 Move taken: D 2
 #..#
 ....
 ...X
 #..#
 
-Evaluation time: 6.3729084
-Move taken: A 2
-#..#
+Evaluation time: 0.1196814
+Move taken: B 0
+#O.#
 ....
-O..X
+...X
 #..#
 
-Evaluation time: 2.8852625
+Evaluation time: 0.0807855
 Move taken: D 1
-#..#
+#O.#
 ...X
+...X
+#..#
+
+Evaluation time: 0.0598471
+Move taken: A 1
+#O.#
 O..X
-#..#
-
-Evaluation time: 1.1335466
-Move taken: B 2
-#..#
 ...X
-OO.X
 #..#
 
-Evaluation time: 0.2812932
+Evaluation time: 0.024935
 Move taken: C 3
-#..#
+#O.#
+O..X
 ...X
+#.X#
+
+Evaluation time: 0.0129671
+Move taken: B 1
+#O.#
 OO.X
-#.X#
-
-Evaluation time: 0.0867686
-Move taken: C 2
-#..#
 ...X
-OOOX
 #.X#
 
-Evaluation time: 0.0189474
-Move taken: C 1
-#..#
+Evaluation time: 0.007015
+Move taken: C 2
+#O.#
+OO.X
 ..XX
-OOOX
 #.X#
-
-Evaluation time: 0.001996
-Move taken: B 3
-#..#
-..XX
-OOOX
-#OX#
 
 Evaluation time: 0.0
-Move taken: C 0
+Move taken: B 2
+#O.#
+OO.X
+.OXX
 #.X#
-..XX
-OOOX
-#OX#
 
-The winner is X!
+The winner is O!
