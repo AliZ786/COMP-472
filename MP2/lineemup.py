@@ -49,9 +49,10 @@ class Game:
 		for x in range(self.n):
 			for y in range(self.n):
 				for (bloc) in self.pb:
-					if(bloc) == (x,y):						
-						#print("HELLO\tGOODNIGHT")
+					if(bloc) == (x,y):				
 						self.current_state[x][y] = "#"
+					#else:
+					#	self.current_state[x][y] = "."
 
 	def draw_board(self):
 		print()
@@ -375,10 +376,14 @@ class Game:
 			if (self.player_turn == 'X' and player_x == self.HUMAN) or (self.player_turn == 'O' and player_o == self.HUMAN):
 					if self.recommend:
 						print(F'Evaluation time: {round(end - start, 7)}s')
+						self.f.write("Evaluation time: " + str(round(end - start, 7)))
+						self.f.write("\n")
 						print(F'Recommended move: x = {x}, y = {y}')
 					(x,y) = self.input_move()
 			if (self.player_turn == 'X' and player_x == self.AI) or (self.player_turn == 'O' and player_o == self.AI):
 						print(F'Evaluation time: {round(end - start, 7)}s')
+						self.f.write("Evaluation time: " + str(round(end - start, 7)))
+						self.f.write("\n")
 						print(F'Player {self.player_turn} under AI control plays: x = {x}, y = {y}')
 
 			mapped_x = dict_x_coord[x]
