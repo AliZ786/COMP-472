@@ -319,7 +319,7 @@ class Game:
 							beta = value
 		return (value, x, y)
 
-	def play(self, algo=None,player_x=None,player_o=None):
+	def play(self, algo=None,player_x=None,player_o=None, player_x_heuristic=None, player_o_heuristic=None):
 		# Dictionary that maps all coordiante values of x to its corresponding string for display purposes
 		dict_x_coord = {
 						0: 'A',
@@ -340,9 +340,14 @@ class Game:
 		else:
 			self.f.write(F'Player 1: HUMAN d={self.d1} ')
 		if algo == self.ALPHABETA:
-			self.f.write(F'a=True \n')
+			self.f.write(F'a=True ')
 		else:
-			self.f.write(F'a=False \n')
+			self.f.write(F'a=False ')
+
+		if(player_x_heuristic == self.e1):
+			self.f.write(F'e1 (regular) \n')
+		else:
+			self.f.write(F'e2 (defensive)\n')
 
 		if player_o == self.AI:
 			self.f.write(F'Player 2: AI d={self.d2} ')
@@ -352,6 +357,11 @@ class Game:
 			self.f.write(F'a=True ')
 		else:
 			self.f.write(F'a=False ')
+		
+		if(player_o_heuristic == self.e1):
+			self.f.write(F'e1 (regular)')
+		else:
+			self.f.write(F'e2 (defensive)')
 
 		self.f.write('\n')
 
@@ -361,6 +371,11 @@ class Game:
 			player_x = self.HUMAN
 		if player_o == None:
 			player_o = self.HUMAN
+		if player_x_heuristic == None:
+			player_x_heuristic == self.e1
+		if player_o_heuristic == None:
+			player_x_heuristic == self.e2
+		
 		while True:
 			self.draw_board()
 			if self.check_end():
@@ -431,19 +446,18 @@ class Game:
 		return e
 
 def main():
-	# g = Game(recommend=True)
-	n = 6
-	b = 2
-	pb = [(0, 0), (1, 2)]
+	n = 4
+	b = 4
+	pb = [(0, 0), (0, 3), (3,3), (3,0)]
 	s = 3
-	d1 = 2
-	d2 = 2
-	t = 5
+	d1 = 6
+	d2 = 6
+	t = 1
 
 
 	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
-	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
-	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.HUMAN)
+	#g.play(algo=Game.MINIMAX,player_x=Game.AI,player_o=Game.HUMAN, player_x_heuristic=None, player_o_heuristic=None)
+	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.HUMAN, player_x_heuristic=None, player_o_heuristic=None)
 
 
 if __name__ == "__main__":
