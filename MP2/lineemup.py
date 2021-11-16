@@ -24,7 +24,6 @@ class Game:
 		self.t = t
 		self.current_state = []
 		self.initialize_game()
-		#self.insert_blocs()
 		self.recommend = recommend
 
 		self.f = open(F'gameTrace-{self.n}{self.b}{self.s}{self.t}.txt', "w")
@@ -266,7 +265,8 @@ class Game:
 							y = j
 						(v, _, _) = self.alphabeta(alpha, beta, depth = depth - 1, max=False)
 						if v > value:
-							value = v
+							#value = v
+							value = self.e2()
 							x = i
 							y = j
 					else:
@@ -276,7 +276,8 @@ class Game:
 							y = j
 						(v, _, _) = self.alphabeta(alpha, beta, depth = depth - 1, max=True)
 						if v < value:
-							value = v
+							#value = v
+							value = self.e2()
 							x = i
 							y = j
 					self.current_state[i][j] = '.'
@@ -391,9 +392,17 @@ class Game:
 		e = self.num_black() - self.num_white()
 		return e
 
+	# Developing e2 (complex heuristic)
+	def e2(self):
+		m_constant = (self.n % self.s) + 1
+		line_c = m_constant * (3 * self.s - (self.n - 2)) # the number of possible solution lines for a board given the line size
+		e = line_c - (self.num_black() + self.num_white())
+		
+		return e
+
 def main():
 	# g = Game(recommend=True)
-	n = 4
+	n = 3
 	b = 2
 	pb = [(0, 0), (1, 2)]
 	s = 3
@@ -403,8 +412,8 @@ def main():
 
 
 	g = Game(n, b, pb, s, d1, d2, t, recommend=True)
-	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
-	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.HUMAN)
+	g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.AI)
+	#g.play(algo=Game.ALPHABETA,player_x=Game.AI,player_o=Game.HUMAN)
 
 
 if __name__ == "__main__":
