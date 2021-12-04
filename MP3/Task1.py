@@ -90,7 +90,7 @@ def modelEvaluation(model_name, filemode):
 
     synonyms_csv.close()
     
-    performanceRatio = "{:.2f}".format((C/V) * 100)
+    performanceRatio = round((C/V) * 100, 2)
     return performanceRatio 
 
 
