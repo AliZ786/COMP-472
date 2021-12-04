@@ -1,15 +1,16 @@
+
 import gensim.downloader as api
 import csv
 
-def modelEvaluation(model_name):
+def modelEvaluation(model_name, filemode):
 
     # load model
     corpus = api.load(model_name)
 
     C = 0
-    V = len(open('MP3/synonyms.csv').readlines())-1
+    V = len(open('Files/synonyms.csv').readlines())-1
     
-    with open('MP3/synonyms.csv', newline='') as synonyms_csv:
+    with open('Files/synonyms.csv', newline='') as synonyms_csv:
         reader = csv.reader(synonyms_csv, delimiter=',')
         # skip first row
         next(reader)
@@ -83,12 +84,15 @@ def modelEvaluation(model_name):
         details_csv.close()
 
         # Task 1.2
-        analysis_csv = open('analysis.csv', 'w')
+        analysis_csv = open('analysis.csv', filemode)
         analysis_csv.write(f'{model_name},{len(corpus)},{C},{V},{C/V}\n')
         analysis_csv.close()
 
-    synonyms_csv.close()    
+    synonyms_csv.close()
+    
+    performanceRatio = "{:.2f}".format((C/V) * 100)
+    return performanceRatio 
 
 
 if __name__ == '__main__':
-    modelEvaluation(model_name = "word2vec-google-news-300")
+    modelEvaluation(model_name = "word2vec-google-news-300", filemode = "w")
