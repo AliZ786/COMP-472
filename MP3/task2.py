@@ -12,7 +12,7 @@ import pandas as pd
 
 def modelComparison():
     # Obtains the success rate from the gold standard, useful for later calculations
-    success_rate_array = pd.read_csv("Crowdsourced Gold-Standard for MP3.csv", usecols=["Sucess Rate"])
+    success_rate_array = pd.read_csv("MP3/Crowdsourced Gold-Standard for MP3.csv", usecols=["Sucess Rate"])
 
     goldstdlist = success_rate_array["Sucess Rate"].tolist()
     goldstdlistclean = [x for x in goldstdlist if x == x]

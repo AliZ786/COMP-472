@@ -8,9 +8,9 @@ def modelEvaluation(model_name, filemode):
     corpus = api.load(model_name)
 
     C = 0
-    V = len(open('Files/synonyms.csv').readlines())-1
+    V = len(open('MP3/synonyms.csv').readlines())-1
     
-    with open('Files/synonyms.csv', newline='') as synonyms_csv:
+    with open('MP3/synonyms.csv', newline='') as synonyms_csv:
         reader = csv.reader(synonyms_csv, delimiter=',')
         # skip first row
         next(reader)
