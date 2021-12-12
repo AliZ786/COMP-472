@@ -7,7 +7,7 @@
 - Ivan Ivachenko - [ivanivachenko](https://github.com/ivanivachenko)
 
 ## URL to the repository (private)
-- https://github.com/AliZ786/COMP-472  
+- https://github.com/salehatrq/COMP-472  
   
 ## Languages and software
 - Language used; Python
